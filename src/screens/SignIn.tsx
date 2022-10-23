@@ -22,9 +22,7 @@ export function SignIn() {
       </Heading>
 
       <Box mt={5}>
-        <BasicImput
-        InputLeftElement={<Icon as={<Envelope/>} />}
-        />
+        <BasicImput />
         <BasicImput my={5}/>
       </Box>
     </VStack>
