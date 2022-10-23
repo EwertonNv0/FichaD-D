@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "ficha-rpg",
+    "slug": "ficha-rpg",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
