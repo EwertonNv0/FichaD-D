@@ -1,5 +1,5 @@
 import { Box, Button, Heading, Icon, Image, Text, useTheme, VStack } from 'native-base';
-import { Envelope, Key } from 'phosphor-react';
+import { Envelope, Key } from 'phosphor-react-native';
 import { BasicImput } from '../components/BasicImput';
 import { LoginRegister } from '../components/LoginRegister';
 
@@ -25,11 +25,13 @@ export function SignIn() {
       <Box mt={5}>
         <BasicImput
           placeholder='Email'
+          InputLeftElement={<Icon as={<Envelope color='snow' />} ml={4}/>}
         />
 
         <BasicImput
           my={5}
           placeholder='Senha'
+          InputLeftElement={<Icon as={<Key color='snow' />} ml={4}/>}
           secureTextEntry
         />
 
