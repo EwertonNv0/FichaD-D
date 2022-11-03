@@ -20,8 +20,11 @@
     "expo-status-bar": "~1.4.0",
     "native-base": "^3.4.19",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "phosphor-react": "^1.4.1",
     "phosphor-react-native": "^1.1.2",
+=======
+>>>>>>> parent of c71867a (instalação phosphor icons)
 =======
 >>>>>>> parent of c71867a (instalação phosphor icons)
     "react": "18.0.0",
