@@ -1,11 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import { Heading, VStack } from 'native-base';
 import { CharacterItem } from '../components/CharacterItem';
-import { NewCharacter } from '../components/NewCharacter';
+import { NewCharacterButton } from '../components/NewCharacterButton';
 import { ScrollTemplate } from '../components/ScrollTemplate';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 
 export function Home() {
+
+    const navigation = useNavigation();
+    
     return (
         <PrimaryTemplate>
             <VStack flex={1}>
@@ -16,13 +20,16 @@ export function Home() {
                 <WhiteTemplate>
                     <VStack h='90%'>
                         <ScrollTemplate>
-                            <CharacterItem />
+                            <CharacterItem
+                                onPress={navigation.navigate('charScreen')}
+                            />
                             <CharacterItem />
                             <CharacterItem />
                         </ScrollTemplate>
                     </VStack>
 
-                    <NewCharacter />
+                    <NewCharacterButton />
+
                 </WhiteTemplate>
             </VStack>
         </PrimaryTemplate>
