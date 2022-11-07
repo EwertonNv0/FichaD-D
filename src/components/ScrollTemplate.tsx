@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollView } from 'native-base';
 
 export function ScrollTemplate(props, {...rest}) {
