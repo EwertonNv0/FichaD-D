@@ -1,10 +1,11 @@
 import { VStack, HStack, Text, Button } from 'native-base';
 
-export function CharacterItem() {
+export function CharacterItem( {...rest} ) {
   return (
     <Button
       bg='white'
       borderRadius='sm'
+      my={1}
       borderWidth={1}
       borderLeftWidth={3}
       borderTopColor='gray.100'
@@ -12,10 +13,10 @@ export function CharacterItem() {
       borderBottomColor='gray.100'
       borderLeftColor='primary.700'
       justifyContent='space-between'
-      my={2}
       _pressed={{
           bg:'#C4C4CC'
       }}
+      {...rest}
     >
       <HStack w='full' justifyContent='space-between'>
         <VStack w='80%' justifyContent='space-between'>
