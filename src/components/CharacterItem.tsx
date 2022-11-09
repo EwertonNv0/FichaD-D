@@ -21,6 +21,7 @@ export function CharacterItem( {...rest} ) {
       <HStack w='full' justifyContent='space-between'>
         <VStack w='80%' justifyContent='space-between'>
           <Text fontSize='xl'>Nome do personagem</Text>
+          
           <Text fontSize='sm'>Classe 1 / Classe 2 / Classe 3</Text>
         </VStack>
 
