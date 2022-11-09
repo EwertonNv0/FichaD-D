@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Heading, VStack } from 'native-base';
 import { CharacterItem } from '../components/CharacterItem';
 import { NewCharacterButton } from '../components/NewCharacterButton';
-import { ScrollTemplate } from '../components/ScrollTemplate';
+import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 
@@ -21,10 +21,8 @@ export function Home() {
                     <VStack h='90%'>
                         <ScrollTemplate>
                             <CharacterItem
-                                onPress={navigation.navigate('charScreen')}
+                                onPress={() => {navigation.navigate('charScreen')}}
                             />
-                            <CharacterItem />
-                            <CharacterItem />
                         </ScrollTemplate>
                     </VStack>
 
