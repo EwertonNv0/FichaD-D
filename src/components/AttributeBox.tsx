@@ -4,11 +4,11 @@ export function AttributeBox() {
     return (
         <Box>
             <HStack
-                borderWidth={2}
-                borderColor='black'
-                borderRadius='md'
                 bg='white'
                 justifyContent='center'
+                borderColor='black'
+                borderRadius='md'
+                borderWidth={2}
                 w={16}
                 h={16}
             >
@@ -22,31 +22,24 @@ export function AttributeBox() {
             </HStack>
 
             <HStack
-                borderWidth={2}
+                bg='white'
+                left='15px'
+                bottom='-12px'
+                position='absolute'
+                justifyContent='center'
                 borderColor='black'
                 borderRadius='lg'
-                bg='white'
-                justifyContent='center'
-                position='absolute'
-                bottom='-12px'
-                left='15px'
+                borderWidth={2}
                 w={8}
                 h={6}
             >
-                {/* <Text
-                    color='black'
-                    fontSize='md'
-                    alignSelf='center'
-                >
-                    20
-                </Text> */}
                 <Input
+                    keyboardType='numeric'
+                    textAlign='center'
                     fontSize='md'
+                    w='full'
                     px={0}
                     py={0}
-                    w='full'
-                    textAlign='center'
-                    keyboardType='numeric'
                     maxLength={2}
                     borderWidth={0}
                 />
