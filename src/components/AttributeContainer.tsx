@@ -1,7 +1,7 @@
 import { Center, HStack, Text } from 'native-base';
 import { AttributeBox } from './AttributeBox';
 
-export function AttributeContainer({ title, ...rest }) {
+export function AttributeContainer({ title,atributo, setAtributo ,...rest }) {
     return (
         <Center {...rest}>
             <HStack justifyContent='flex-start'>
@@ -9,7 +9,7 @@ export function AttributeContainer({ title, ...rest }) {
                     {title}
                 </Text>
             </HStack>
-            <AttributeBox />
+            <AttributeBox atributo={atributo} setAtributo={setAtributo} />
         </Center>
     );
 }
