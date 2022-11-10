@@ -10,6 +10,7 @@ export function WhiteTemplate( props ) {
                 borderTopRadius='sm'
                 flex={1}
                 px={2}
+                pt={2}
             >
                 {props.children}
             </VStack>
