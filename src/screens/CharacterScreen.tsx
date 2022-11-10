@@ -1,8 +1,7 @@
-import { Box, Button, Center, Checkbox, HStack, Icon, Input, Text, VStack } from 'native-base';
+import { Box, Button, Checkbox, HStack, Icon, Text, VStack } from 'native-base';
 import { PencilLine } from 'phosphor-react-native';
-import { AttributeBox } from '../components/AttributeBox';
+import { AbilityBox } from '../components/AbilityBox';
 import { AttributeContainer } from '../components/AttributeContainer';
-import { Label } from '../components/Label';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
@@ -36,69 +35,69 @@ export function CharacterScreen() {
       <WhiteTemplate>
         <ScrollTemplate>
           <VStack w='full'>
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Força' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
-                <Checkbox value="atletics">Atletismo</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
+                <AbilityBox title='Atletismo' />
               </VStack>
             </HStack>
 
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Destreza' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
-                <Checkbox value="acrobatics">Acrobacia</Checkbox>
-                <Checkbox value="stealth">Furtividade</Checkbox>
-                <Checkbox value="prestidigitation">Prestidigitação</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
+                <AbilityBox title='Acrobacia' />
+                <AbilityBox title='Furtividade' />
+                <AbilityBox title='Prestidigitação' />
               </VStack>
             </HStack>
 
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Constituição' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
               </VStack>
             </HStack>
 
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Inteligência' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
-                <Checkbox value="arcanism">Arcanismo</Checkbox>
-                <Checkbox value="history">História</Checkbox>
-                <Checkbox value="investigation">Investigação</Checkbox>
-                <Checkbox value="nature">Natureza</Checkbox>
-                <Checkbox value="religion">Religião</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
+                <AbilityBox title='Arcanismo' />
+                <AbilityBox title='História' />
+                <AbilityBox title='Investigação' />
+                <AbilityBox title='Natureza' />
+                <AbilityBox title='Religião' />
               </VStack>
             </HStack>
 
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Sabedoria' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
-                <Checkbox value="animalHandling">Adestrar Animais</Checkbox>
-                <Checkbox value="intuition">Intuição</Checkbox>
-                <Checkbox value="medicin">Medicina</Checkbox>
-                <Checkbox value="perception">Percepção</Checkbox>
-                <Checkbox value="survivor">Sobrevivência</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
+                <AbilityBox title='Adestrar Animais' />
+                <AbilityBox title='Intuição' />
+                <AbilityBox title='Medicina' />
+                <AbilityBox title='Percepção' />
+                <AbilityBox title='Sobrevivência' />
               </VStack>
             </HStack>
 
-            <HStack justifyContent='space-around' mb={4}>
+            <HStack justifyContent='space-between' pt={4}>
               <AttributeContainer w='25%' alignSelf='flex-start' title='Carisma' />
 
               <VStack w='70%'>
-                <Checkbox value="testSave">Teste de Resistência</Checkbox>
-                <Checkbox value="acting">Atuação</Checkbox>
-                <Checkbox value="cheat">Enganação</Checkbox>
-                <Checkbox value="intimidation">Intimidação</Checkbox>
-                <Checkbox value="persiation">Persuasão</Checkbox>
+                <AbilityBox title='Teste de Resistência' />
+                <AbilityBox title='Atuação' />
+                <AbilityBox title='Enganação' />
+                <AbilityBox title='Intimidação' />
+                <AbilityBox title='Persuasão' />
               </VStack>
             </HStack>
           </VStack>
