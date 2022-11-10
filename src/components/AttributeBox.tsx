@@ -1,6 +1,18 @@
 import { Box, HStack, Input, Text } from 'native-base';
 
-export function AttributeBox() {
+export function AttributeBox({ atributo, setAtributo }) {
+
+    const modificador = () => {
+        const intMod = parseInt(atributo)
+        if (isNaN(intMod)) {
+            return ''
+        }
+        else {
+            const mod = Math.floor((intMod - 10) / 2)
+            return mod <= 0 ? mod : `+${mod}`
+        }
+    }
+
     return (
         <Box>
             <HStack
@@ -17,7 +29,7 @@ export function AttributeBox() {
                     fontSize='3xl'
                     alignSelf='center'
                 >
-                    +5
+                    {modificador()}
                 </Text>
             </HStack>
 
@@ -42,6 +54,8 @@ export function AttributeBox() {
                     py={0}
                     maxLength={2}
                     borderWidth={0}
+                    value={atributo}
+                    onChangeText={setAtributo}
                 />
             </HStack>
         </Box>
