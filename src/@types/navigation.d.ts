@@ -3,6 +3,7 @@ export declare global {
         interface RootParamList {
             home: undefined;
             signIn: undefined;
+            newChar: undefined;
             charScreen: {
                 id: string
             }

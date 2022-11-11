@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import { FlatList, Heading, VStack } from 'native-base';
+import { FlatList, Heading, HStack, Icon, Text, useTheme, VStack } from 'native-base';
 import { CharacterItem } from '../components/CharacterItem';
 import { NewCharacterButton } from '../components/NewCharacterButton';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
@@ -7,36 +6,45 @@ import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import { SmileySad } from 'phosphor-react-native';
+import { Loading } from '../components/Loading';
 
 export function Home() {
+    const {colors} = useTheme()
 
     const [listaPersonagens, setListaPersonagens] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const getData = async () => {
         try {
-          await AsyncStorage.getItem('characters')
-            .then((item) => {
-              const characters = JSON.parse(item)
+          await AsyncStorage.getAllKeys()
+            .then(async (keys) => {
+                await AsyncStorage.multiGet(keys)
+                .then(async (data) => {
+                    const lista = data.map(personagem => {
+                        return JSON.parse(personagem[1])
+                    })
 
-              console.log(characters)
-
-              setListaPersonagens(characters)
+                    setListaPersonagens(lista)
+                })
             })
             .catch((error) => {
-              console.log(error)
+                console.log(error)
             })
-          // return jsonValue != null ? JSON.parse(jsonValue) : null;
+            .finally(() => {
+                setIsLoading(false)
+            })
         } catch (e) {
-          // error reading value
+            // error reading value
         }
     }
 
     useEffect(() => {
         getData()
     },[])
-
-    const navigation = useNavigation();
     
+    if(isLoading) return <Loading />
+
     return (
         <PrimaryTemplate>
             <VStack flex={1}>
@@ -46,6 +54,8 @@ export function Home() {
 
                 <WhiteTemplate>
                     <VStack h='90%'>
+                        {listaPersonagens
+                        ?
                         <FlatList
                             keyExtractor={item => String(item.id)}
                             data={listaPersonagens}                        
@@ -53,6 +63,22 @@ export function Home() {
                                 ({item}) => <CharacterItem dataChar={item} />
                             }
                         />
+                        :
+                        <VStack alignSelf='center' mt={24}>
+                            <HStack alignSelf='center'>
+                                <Icon as={<SmileySad size={98} color={colors.gray[200]} />} />
+                            </HStack>
+                            <Text
+                            color='gray.200'
+                            textAlign='center'
+                            fontSize='xl'
+                            my={5}
+                            px={9}
+                            >
+                                Você ainda não cadastrou nenhum personagem
+                            </Text>
+                        </VStack>
+                        }
                     </VStack>
 
                     <NewCharacterButton />
