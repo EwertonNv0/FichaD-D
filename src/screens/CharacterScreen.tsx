@@ -5,16 +5,95 @@ import { AttributeContainer } from '../components/AttributeContainer';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export function CharacterScreen() {
-  
+interface CharacterData {
+  attributes: {
+    strenth: string,
+    dexterity: string,
+    constituition: string,
+    inteligency: string,
+    wisdom: string,
+    charisma: string,
+  }
+}
+
+export function CharacterScreen({ route, navigation }) {
+
+  const { id } = route.params
+  const [characterList, setCharacterList] = useState([])
+  const [character, setCharacter] = useState<CharacterData>({} as CharacterData)
+
+  const storeData = async () => {
+    try {
+      const jsonValue = JSON.stringify(characterList)
+      await AsyncStorage.setItem('characters', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const updateAttributes = () => {
+    setStrAtt(character.attributes ? character.attributes.strenth : '')
+    setDexAtt(character.attributes ? character.attributes.dexterity : '')
+    setConAtt(character.attributes ? character.attributes.constituition : '')
+    setIntAtt(character.attributes ? character.attributes.inteligency : '')
+    setWisAtt(character.attributes ? character.attributes.wisdom : '')
+    setChaAtt(character.attributes ? character.attributes.charisma : '')
+  }
+
+  const getData = async () => {
+    try {
+      await AsyncStorage.getItem('characters')
+        .then((item) => {
+          setCharacterList(JSON.parse(item))
+
+          const character = characterList.find(char => char.id == id)
+          if (character) {
+            setCharacter(character)
+            updateAttributes()
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      // error reading value
+    }
+  }
+
+  const saveData = () => {
+
+    const attributes = {
+      strenth: strAtt,
+      dexterity: dexAtt,
+      constituition: conAtt,
+      inteligency: intAtt,
+      wisdom: wisAtt,
+      charisma: chaAtt,
+    }
+
+    characterList[id] = {
+      ...character,
+      attributes: attributes
+    }
+
+    storeData()
+  }
+
   const [strAtt, setStrAtt] = useState('');
   const [dexAtt, setDexAtt] = useState('');
   const [conAtt, setConAtt] = useState('');
   const [intAtt, setIntAtt] = useState('');
   const [wisAtt, setWisAtt] = useState('');
   const [chaAtt, setChaAtt] = useState('');
+
+  useEffect(() => {
+    console.log(id)
+    getData()
+  }, [])
 
   return (
     <PrimaryTemplate>
@@ -50,6 +129,9 @@ export function CharacterScreen() {
               <VStack w='70%'>
                 <AbilityBox title='Teste de Resistência' atributo={strAtt} />
                 <AbilityBox title='Atletismo' atributo={strAtt} />
+
+                {/* ---------------------------------------------------------- */}
+                <Button onPress={saveData}>assd</Button>
               </VStack>
             </HStack>
 
