@@ -10,30 +10,30 @@ import { SmileySad } from 'phosphor-react-native';
 import { Loading } from '../components/Loading';
 
 export function Home() {
-    const {colors} = useTheme()
+    const { colors } = useTheme()
 
     const [listaPersonagens, setListaPersonagens] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     const getData = async () => {
         try {
-          await AsyncStorage.getAllKeys()
-            .then(async (keys) => {
-                await AsyncStorage.multiGet(keys)
-                .then(async (data) => {
-                    const lista = data.map(personagem => {
-                        return JSON.parse(personagem[1])
-                    })
+            await AsyncStorage.getAllKeys()
+                .then(async (keys) => {
+                    await AsyncStorage.multiGet(keys)
+                        .then(async (data) => {
+                            const lista = data.map(personagem => {
+                                return JSON.parse(personagem[1])
+                            })
 
-                    setListaPersonagens(lista)
+                            setListaPersonagens(lista)
+                        })
                 })
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
+                .catch((error) => {
+                    console.log(error)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
         } catch (e) {
             // error reading value
         }
@@ -41,9 +41,9 @@ export function Home() {
 
     useEffect(() => {
         getData()
-    },[])
-    
-    if(isLoading) return <Loading />
+    }, [])
+
+    if (isLoading) return <Loading />
 
     return (
         <PrimaryTemplate>
@@ -55,29 +55,29 @@ export function Home() {
                 <WhiteTemplate>
                     <VStack h='90%'>
                         {listaPersonagens
-                        ?
-                        <FlatList
-                            keyExtractor={item => String(item.id)}
-                            data={listaPersonagens}                        
-                            renderItem={
-                                ({item}) => <CharacterItem dataChar={item} />
-                            }
-                        />
-                        :
-                        <VStack alignSelf='center' mt={24}>
-                            <HStack alignSelf='center'>
-                                <Icon as={<SmileySad size={98} color={colors.gray[200]} />} />
-                            </HStack>
-                            <Text
-                            color='gray.200'
-                            textAlign='center'
-                            fontSize='xl'
-                            my={5}
-                            px={9}
-                            >
-                                Você ainda não cadastrou nenhum personagem
-                            </Text>
-                        </VStack>
+                            ?
+                            <FlatList
+                                keyExtractor={item => String(item.id)}
+                                data={listaPersonagens}
+                                renderItem={
+                                    ({ item }) => <CharacterItem dataChar={item} />
+                                }
+                            />
+                            :
+                            <VStack alignSelf='center' mt={24}>
+                                <HStack alignSelf='center'>
+                                    <Icon as={<SmileySad size={98} color={colors.gray[200]} />} />
+                                </HStack>
+                                <Text
+                                    color='gray.200'
+                                    textAlign='center'
+                                    fontSize='xl'
+                                    my={5}
+                                    px={9}
+                                >
+                                    Você ainda não cadastrou nenhum personagem
+                                </Text>
+                            </VStack>
                         }
                     </VStack>
 
