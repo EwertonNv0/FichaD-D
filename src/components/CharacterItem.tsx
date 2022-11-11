@@ -1,6 +1,10 @@
 import { VStack, HStack, Text, Button } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 
-export function CharacterItem( {...rest} ) {
+export function CharacterItem( {dataChar, ...rest} ) {
+  
+  const navigation = useNavigation();
+
   return (
     <Button
       bg='white'
@@ -16,17 +20,20 @@ export function CharacterItem( {...rest} ) {
       _pressed={{
           bg:'#C4C4CC'
       }}
+      onPress={() => {navigation.navigate('charScreen', {
+        id: dataChar.id
+      })}}
       {...rest}
     >
       <HStack w='full' justifyContent='space-between'>
         <VStack w='80%' justifyContent='space-between'>
-          <Text fontSize='xl'>Nome do personagem</Text>
+          <Text fontSize='xl'>{dataChar.name}</Text>
           
-          <Text fontSize='sm'>Classe 1 / Classe 2 / Classe 3</Text>
+          <Text fontSize='sm'>{dataChar.class}</Text>
         </VStack>
 
         <HStack w='20%' alignItems='center'>
-          <Text fontSize='md'>Nvl. 20</Text>
+          <Text fontSize='md'>Nvl. {dataChar.level}</Text>
         </HStack>
       </HStack>
     </Button>
