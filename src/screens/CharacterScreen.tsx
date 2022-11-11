@@ -18,8 +18,7 @@ export function CharacterScreen({ route, navigation }) {
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false)
 
   const updateAttributes = (character) => {
-    if(character.attributes)
-    {
+    if (character.attributes) {
       setStrAtt(character.attributes.strenth)
       setDexAtt(character.attributes.dexterity)
       setConAtt(character.attributes.constituition)
@@ -31,7 +30,7 @@ export function CharacterScreen({ route, navigation }) {
 
   const saveData = () => {
 
-    if(isLoadingUpdate) return
+    if (isLoadingUpdate) return
 
     setIsLoadingUpdate(true)
 
@@ -50,9 +49,9 @@ export function CharacterScreen({ route, navigation }) {
     }
 
     storeCharacter(id, charUpdated)
-    .then(() => {
-      setIsLoadingUpdate(false)
-    })
+      .then(() => {
+        setIsLoadingUpdate(false)
+      })
   }
 
   const [strAtt, setStrAtt] = useState('');
@@ -64,14 +63,14 @@ export function CharacterScreen({ route, navigation }) {
 
   useEffect(() => {
     getData(id)
-    .then((char) => {
-      setIsLoading(false)
-      setCharacter(char as CharacterData)
-      updateAttributes(char)
-    })
+      .then((char) => {
+        setIsLoading(false)
+        setCharacter(char as CharacterData)
+        updateAttributes(char)
+      })
   }, [])
 
-  if(isLoading) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <PrimaryTemplate>
@@ -103,8 +102,8 @@ export function CharacterScreen({ route, navigation }) {
           <VStack w='full'>
             {/* ---------------------------------------------------------- */}
             <Button
-            onPress={saveData}
-            isLoading={isLoadingUpdate}
+              onPress={saveData}
+              isLoading={isLoadingUpdate}
             >
               Salvar
             </Button>
