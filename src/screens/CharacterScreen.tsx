@@ -6,65 +6,34 @@ import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-interface CharacterData {
-  attributes: {
-    strenth: string,
-    dexterity: string,
-    constituition: string,
-    inteligency: string,
-    wisdom: string,
-    charisma: string,
-  }
-}
+import { Loading } from '../components/Loading';
+import { getData, storeCharacter } from '../services/CharacterService';
+import { CharacterData } from '../interfaces/CharacterData';
 
 export function CharacterScreen({ route, navigation }) {
 
   const { id } = route.params
-  const [characterList, setCharacterList] = useState([])
   const [character, setCharacter] = useState<CharacterData>({} as CharacterData)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false)
 
-  const storeData = async () => {
-    try {
-      const jsonValue = JSON.stringify(characterList)
-      await AsyncStorage.setItem('characters', jsonValue)
-    } catch (e) {
-      // saving error
-    }
-  }
-
-  const updateAttributes = () => {
-    setStrAtt(character.attributes ? character.attributes.strenth : '')
-    setDexAtt(character.attributes ? character.attributes.dexterity : '')
-    setConAtt(character.attributes ? character.attributes.constituition : '')
-    setIntAtt(character.attributes ? character.attributes.inteligency : '')
-    setWisAtt(character.attributes ? character.attributes.wisdom : '')
-    setChaAtt(character.attributes ? character.attributes.charisma : '')
-  }
-
-  const getData = async () => {
-    try {
-      await AsyncStorage.getItem('characters')
-        .then((item) => {
-          setCharacterList(JSON.parse(item))
-
-          const character = characterList.find(char => char.id == id)
-          if (character) {
-            setCharacter(character)
-            updateAttributes()
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      // return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-      // error reading value
+  const updateAttributes = (character) => {
+    if(character.attributes)
+    {
+      setStrAtt(character.attributes.strenth)
+      setDexAtt(character.attributes.dexterity)
+      setConAtt(character.attributes.constituition)
+      setIntAtt(character.attributes.inteligency)
+      setWisAtt(character.attributes.wisdom)
+      setChaAtt(character.attributes.charisma)
     }
   }
 
   const saveData = () => {
+
+    if(isLoadingUpdate) return
+
+    setIsLoadingUpdate(true)
 
     const attributes = {
       strenth: strAtt,
@@ -75,12 +44,15 @@ export function CharacterScreen({ route, navigation }) {
       charisma: chaAtt,
     }
 
-    characterList[id] = {
+    const charUpdated = {
       ...character,
       attributes: attributes
     }
 
-    storeData()
+    storeCharacter(id, charUpdated)
+    .then(() => {
+      setIsLoadingUpdate(false)
+    })
   }
 
   const [strAtt, setStrAtt] = useState('');
@@ -91,9 +63,15 @@ export function CharacterScreen({ route, navigation }) {
   const [chaAtt, setChaAtt] = useState('');
 
   useEffect(() => {
-    console.log(id)
-    getData()
+    getData(id)
+    .then((char) => {
+      setIsLoading(false)
+      setCharacter(char as CharacterData)
+      updateAttributes(char)
+    })
   }, [])
+
+  if(isLoading) return <Loading />
 
   return (
     <PrimaryTemplate>
@@ -102,7 +80,7 @@ export function CharacterScreen({ route, navigation }) {
         alignItems='center'
       >
         <Text fontWeight='bold' color='white' alignSelf='center' fontSize='2xl' my={2}>
-          Nome do Personagem
+          {character.name}
         </Text>
 
         <Box ml={2}>
@@ -123,15 +101,20 @@ export function CharacterScreen({ route, navigation }) {
       <WhiteTemplate>
         <ScrollTemplate>
           <VStack w='full'>
+            {/* ---------------------------------------------------------- */}
+            <Button
+            onPress={saveData}
+            isLoading={isLoadingUpdate}
+            >
+              Salvar
+            </Button>
+
             <HStack justifyContent='space-between' py={4} borderBottomWidth={1} borderBottomColor='gray.100'>
               <AttributeContainer atributo={strAtt} setAtributo={setStrAtt} w='25%' alignSelf='flex-start' title='Força' />
 
               <VStack w='70%'>
                 <AbilityBox title='Teste de Resistência' atributo={strAtt} />
                 <AbilityBox title='Atletismo' atributo={strAtt} />
-
-                {/* ---------------------------------------------------------- */}
-                <Button onPress={saveData}>assd</Button>
               </VStack>
             </HStack>
 
