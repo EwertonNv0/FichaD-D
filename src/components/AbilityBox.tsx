@@ -17,7 +17,7 @@ export function AbilityBox({ title, atributo }) {
     }
 
     return (
-        <HStack w='full' alignItems='center'>
+        <HStack w='full' alignItems='center' my='1px'>
             <Checkbox
                 borderRadius='full'
                 value='proficiency'
@@ -35,8 +35,10 @@ export function AbilityBox({ title, atributo }) {
                 px={1}
                 py={0}
                 bg='transparent'
+                borderWidth={1}                                
+                borderColor='gray.100'
                 _pressed={{
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'gray.100'
                 }}
             >
                 <Text fontSize='md'>
