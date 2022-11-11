@@ -1,6 +1,6 @@
 import { Input as NativeBaseInput, IInputProps } from 'native-base';
 
-export function BasicImput({ ...rest }: IInputProps) {
+export function BasicInput({ ...rest }: IInputProps) {
     return (
         <NativeBaseInput
             w='full'

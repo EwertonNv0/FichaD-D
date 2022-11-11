@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Icon, Image, Text, useTheme, VStack } from 'native-base';
 import { color } from 'native-base/lib/typescript/theme/styled-system';
 import { Envelope, Key } from 'phosphor-react-native';
-import { BasicImput } from '../components/BasicImput';
+import { BasicInput } from '../components/BasicInput';
 import { LoginRegister } from '../components/LoginRegister';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 
@@ -26,13 +26,13 @@ export function SignIn() {
         </Heading>
 
         <Box mt={5}>
-          <BasicImput
+          <BasicInput
             placeholder='Email'
             InputLeftElement={<Icon as={<Envelope color={colors.gray['200']} />} ml={4} />}
             isRequired
           />
 
-          <BasicImput
+          <BasicInput
             my={5}
             placeholder='Senha'
             InputLeftElement={<Icon as={<Key color={colors.gray['200']} />} ml={4} />}
