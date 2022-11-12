@@ -5,7 +5,7 @@ import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { SmileySad } from 'phosphor-react-native';
+import { Warning } from 'phosphor-react-native';
 import { Loading } from '../components/Loading';
 
 export function Home() {
@@ -62,8 +62,8 @@ export function Home() {
                                 ({ item }) => <CharacterItem dataChar={item} />
                             }
                             ListEmptyComponent={() => (
-                                <Center>
-                                    <SmileySad color={colors.gray[200]} size={40} />
+                                <Center mt='50%'>
+                                    <Warning color={colors.gray[200]} size={96} />
                                     <Text color='gray.200' fontSize='lg' textAlign='center'>
                                         Sem personagens cadastrados.
                                     </Text>
