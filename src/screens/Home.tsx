@@ -1,7 +1,6 @@
-import { FlatList, Heading, HStack, Icon, Text, useTheme, VStack } from 'native-base';
+import { Center, FlatList, Heading, Text, useTheme, VStack } from 'native-base';
 import { CharacterItem } from '../components/CharacterItem';
 import { NewCharacterButton } from '../components/NewCharacterButton';
-import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -54,31 +53,23 @@ export function Home() {
 
                 <WhiteTemplate>
                     <VStack h='90%'>
-                        {listaPersonagens
-                            ?
-                            <FlatList
-                                keyExtractor={item => String(item.id)}
-                                data={listaPersonagens}
-                                renderItem={
-                                    ({ item }) => <CharacterItem dataChar={item} />
-                                }
-                            />
-                            :
-                            <VStack alignSelf='center' mt={24}>
-                                <HStack alignSelf='center'>
-                                    <Icon as={<SmileySad size={98} color={colors.gray[200]} />} />
-                                </HStack>
-                                <Text
-                                    color='gray.200'
-                                    textAlign='center'
-                                    fontSize='xl'
-                                    my={5}
-                                    px={9}
-                                >
-                                    Você ainda não cadastrou nenhum personagem
-                                </Text>
-                            </VStack>
-                        }
+                        <FlatList
+                            keyExtractor={item => String(item.id)}
+                            data={listaPersonagens}
+                            showsVerticalScrollIndicator={false}
+                            contentContainerStyle={{ paddingBottom: 50 }}
+                            renderItem={
+                                ({ item }) => <CharacterItem dataChar={item} />
+                            }
+                            ListEmptyComponent={() => (
+                                <Center>
+                                    <SmileySad color={colors.gray[200]} size={40} />
+                                    <Text color='gray.200' fontSize='lg' textAlign='center'>
+                                        Sem personagens cadastrados.
+                                    </Text>
+                                </Center>
+                            )}
+                        />
                     </VStack>
 
                     <NewCharacterButton />
