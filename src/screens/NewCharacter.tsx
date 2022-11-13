@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, CheckIcon, Heading, Select, Text, View, VStack } from 'native-base';
+import { Box, Button, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -134,10 +134,26 @@ export function NewCharacter({ route, navigation }) {
                                 <Text py={10}>Daqui pra baixo não precisa preeencher</Text>
 
                                 <VStack>
-                                    <Box>
-                                        <BasicInput placeholder='Nome' />
-                                        <BasicInput placeholder='Nivel' />
-                                    </Box>
+                                    <HStack justifyContent='space-between' mb={2}>
+                                        <BasicInput
+                                            w='75%'
+                                            placeholder='Nome'
+                                            color='black'
+                                            _focus={{
+                                                color: 'black'
+                                            }}
+                                        />
+                                        <BasicInput
+                                            w='20%'
+                                            placeholder='Nivel'
+                                            keyboardType='numeric'
+                                            maxLength={2}
+                                            color='black'
+                                            _focus={{
+                                                color: 'black'
+                                            }}
+                                        />
+                                    </HStack>
                                     <Box>
                                         <Select
                                             mt={1}
@@ -158,6 +174,7 @@ export function NewCharacter({ route, navigation }) {
                                             <Select.Item label="Backend Development" value="backend" />
                                         </Select>
                                     </Box>
+                                    {/* Apenas se a raça possuir uma variação */}
                                     <Box>
                                         <Select
                                             mt={1}
