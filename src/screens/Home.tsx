@@ -9,8 +9,8 @@ import { Warning } from 'phosphor-react-native';
 import { Loading } from '../components/Loading';
 
 export function Home() {
-    const { colors } = useTheme()
 
+    const { colors } = useTheme()
     const [listaPersonagens, setListaPersonagens] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
