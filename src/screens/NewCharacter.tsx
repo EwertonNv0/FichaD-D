@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
+import { Box, Button, Center, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,16 +7,44 @@ import md5 from 'md5'
 import { AlertBox } from '../components/AlertBox';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { BasicInput } from '../components/BasicInput';
+import { ButtonIcons } from '../components/ButtonIcons';
+import { MinusCircle, PlusCircle } from 'phosphor-react-native';
+import { more, less } from '../utils/Attributes';
+import { Filter } from '../components/Filter';
 
 export function NewCharacter({ route, navigation }) {
-    const [isLoading, setIsLoading] = useState(false)
-    const [charRegister, setCharResgister] = useState(false)
+
+    // Formulario parte 01
+    const [isLoading,     setIsLoading] = useState(false)
+    const [charRegister,  setCharResgister] = useState(false)
     const [avisoCadastro, setAvisoCadastro] = useState('')
 
-    const [name, setName] = useState('')
+    const [name,   setName] = useState('')
     const [classe, setClass] = useState('')
-    const [race, setRace] = useState('')
-    const [level, setLevel] = useState('')
+    const [race,   setRace] = useState('')
+    const [level,  setLevel] = useState('')
+
+    // Formulário parte 02
+
+
+    // Formulário parte 03
+
+
+    // Formulário parte 04
+    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
+
+    const [strenth,       setStrenth] = useState(8)
+    const [dexterity,     setDexterity] = useState(8)
+    const [constituition, setConstituition] = useState(8)
+    const [intelligence,  setIntelligence] = useState(8)
+    const [wisdom,        setWisdom] = useState(8)
+    const [charisma,      setCharisma] = useState(8)
+
+    // Formulário parte 05
+
+
+    // Formulário parte 06
+
 
     const registerCharacter = async () => {
         if (isLoading) return
@@ -70,15 +98,17 @@ export function NewCharacter({ route, navigation }) {
                             activeStepIconBorderColor='#eb220e'
                             completedStepIconColor='#eb220e'
                             activeStepIconColor='#eb220e'
-                            disabledStepNumColor='#000'
-                            activeStepNumColor='#FFF'
+                            disabledStepNumColor='#000000'
+                            activeStepNumColor='#FFFFFF'
                             marginBottom={0}
                             topOffset={0}
                         >
+
+                            {/* Formulario parte 01 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
                             >
-                                <VStack>
+                                <View>
                                     {charRegister &&
                                         <AlertBox
                                             title='Cadastro de Personagem'
@@ -129,7 +159,7 @@ export function NewCharacter({ route, navigation }) {
                                     >
                                         Criar Personagem
                                     </Button>
-                                </VStack>
+                                </View>
 
                                 <Text py={10}>Daqui pra baixo não precisa preeencher</Text>
 
@@ -239,10 +269,10 @@ export function NewCharacter({ route, navigation }) {
                                 </VStack>
                             </ProgressStep>
 
+                            {/* Formulario parte 02 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
                                 previousBtnText='Anterior'
-                                finishBtnText='Pronto!'
                                 previousBtnTextStyle={{
                                     color: '#eb220e'
                                 }}
@@ -252,10 +282,10 @@ export function NewCharacter({ route, navigation }) {
                                 </View>
                             </ProgressStep>
 
+                            {/* Formulario parte 03 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
                                 previousBtnText='Anterior'
-                                finishBtnText='Pronto!'
                                 previousBtnTextStyle={{
                                     color: '#eb220e'
                                 }}
@@ -265,23 +295,160 @@ export function NewCharacter({ route, navigation }) {
                                 </View>
                             </ProgressStep>
 
+                            {/* Formulario parte 04 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
                                 previousBtnText='Anterior'
-                                finishBtnText='Pronto!'
                                 previousBtnTextStyle={{
                                     color: '#eb220e'
                                 }}
                             >
-                                <View alignItems='center'>
-                                    <Text>Pontos de vida e compra/distribuição de pontos</Text>
+                                <View>
+                                    <HStack justifyContent='center'>
+                                        <Filter
+                                            type='open'
+                                            title='Compra de Pontos'
+                                            onPress={() => setStatusSelected('open')}
+                                            isActive={statusSelected === 'open'}
+                                            borderLeftRadius='md'
+                                        />
+
+                                        <Filter
+                                            type='closed'
+                                            title='Rolagem de Pontos'
+                                            onPress={() => setStatusSelected('closed')}
+                                            isActive={statusSelected === 'closed'}
+                                            borderRightRadius='md'
+                                        />
+                                    </HStack>
+
+                                    <HStack
+                                        w="full"
+                                        p={2}
+                                        borderRadius={0}
+                                        alignItems='center'
+                                    >
+                                        <Box w='30%'>
+                                            <Text fontSize='5xl' alignSelf='center'>24</Text>
+                                        </Box>
+
+                                        <Box w='70%'>
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Força</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(strenth, setStrenth) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{strenth}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(strenth, setStrenth) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Destreza</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(dexterity, setDexterity) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{dexterity}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(dexterity, setDexterity) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Constituição</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(constituition, setConstituition) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{constituition}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(constituition, setConstituition) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Inteligência</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(intelligence, setIntelligence) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{intelligence}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(intelligence, setIntelligence) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Sabedoria</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(wisdom, setWisdom) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{wisdom}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(wisdom, setWisdom) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+
+                                            <HStack justifyContent='space-between' mb={2}>
+                                                <Text fontSize='lg'>Carisma</Text>
+
+                                                <HStack w="103px" justifyContent='space-between'>
+                                                    <ButtonIcons
+                                                        as={<MinusCircle />}
+                                                        onPress={() => { less(charisma, setCharisma) }}
+                                                    />
+
+                                                    <Text fontSize='lg' mx={4}>{charisma}</Text>
+
+                                                    <ButtonIcons
+                                                        as={<PlusCircle />}
+                                                        onPress={() => { more(charisma, setCharisma) }}
+                                                    />
+                                                </HStack>
+                                            </HStack>
+                                        </Box>
+                                    </HStack>
                                 </View>
                             </ProgressStep>
 
+                            {/* Formulario parte 05 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
                                 previousBtnText='Anterior'
-                                finishBtnText='Pronto!'
                                 previousBtnTextStyle={{
                                     color: '#eb220e'
                                 }}
@@ -291,6 +458,7 @@ export function NewCharacter({ route, navigation }) {
                                 </View>
                             </ProgressStep>
 
+                            {/* Formulario parte 06 */}
                             <ProgressStep
                                 previousBtnText='Anterior'
                                 finishBtnText='Pronto!'
