@@ -12,7 +12,7 @@ export function BasicInput({ ...rest }: IInputProps) {
             borderWidth={0}
             borderBottomWidth={1}
             borderColor='gray.300'
-            placeholderTextColor='gray.200'
+            placeholderTextColor='gray.700'
             _focus={{
                 backgroundColor: 'transparent',
                 borderBottomColor: '#EEEEEE',
