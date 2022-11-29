@@ -1,4 +1,4 @@
-import { Button, Text, IButtonProps, useTheme } from 'native-base';
+import { Button, Text, IButtonProps } from 'native-base';
 
 type Props = IButtonProps & {
     title: string;
@@ -7,10 +7,6 @@ type Props = IButtonProps & {
 }
 
 export function Filter({ title, isActive = false, type, ...rest }: Props) {
-
-    const { colors } = useTheme();
-    const colorType = type === 'open' ? colors.gray[900] : colors.gray[200]
-
     return (
         <Button
             alignSelf='center'
