@@ -95,11 +95,12 @@ export function NewCharacter({ route, navigation }) {
                             progressBarColor='transparent'
                             disabledStepIconColor='transparent'
                             completedProgressBarColor='transparent'
-                            activeStepIconBorderColor='#eb220e'
-                            completedStepIconColor='#eb220e'
-                            activeStepIconColor='#eb220e'
-                            disabledStepNumColor='#000000'
-                            activeStepNumColor='#FFFFFF'
+                            activeStepIconBorderColor='transparent'
+                            completedStepIconColor='transparent'
+                            activeStepIconColor='transparent'
+                            disabledStepNumColor='transparent'
+                            activeStepNumColor='transparent'
+                            completedCheckColor='transparent'
                             marginBottom={0}
                             topOffset={0}
                         >
@@ -190,18 +191,18 @@ export function NewCharacter({ route, navigation }) {
                                             w='full'
                                             accessibilityLabel='Raça'
                                             placeholder='Raça'
-                                            borderColor='gray.300'
+                                            borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
                                                 bg: 'teal.600',
-                                                endIcon: <CheckIcon size="5" />
+                                                endIcon: <CheckIcon size='5' />
                                             }}
                                         >
-                                            <Select.Item label="UX Research" value="ux" />
-                                            <Select.Item label="Web Development" value="web" />
-                                            <Select.Item label="Cross Platform Development" value="cross" />
-                                            <Select.Item label="UI Designing" value="ui" />
-                                            <Select.Item label="Backend Development" value="backend" />
+                                            <Select.Item label='UX Research' value='ux' />
+                                            <Select.Item label='Web Development' value='web' />
+                                            <Select.Item label='Cross Platform Development' value='cross' />
+                                            <Select.Item label='UI Designing' value='ui' />
+                                            <Select.Item label='Backend Development' value='backend' />
                                         </Select>
                                     </Box>
                                     {/* Apenas se a raça possuir uma variação */}
@@ -211,18 +212,18 @@ export function NewCharacter({ route, navigation }) {
                                             w='full'
                                             accessibilityLabel='Sub-Raça'
                                             placeholder='Sub-Raça'
-                                            borderColor='gray.300'
+                                            borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
                                                 bg: 'teal.600',
-                                                endIcon: <CheckIcon size="5" />
+                                                endIcon: <CheckIcon size='5' />
                                             }}
                                         >
-                                            <Select.Item label="UX Research" value="ux" />
-                                            <Select.Item label="Web Development" value="web" />
-                                            <Select.Item label="Cross Platform Development" value="cross" />
-                                            <Select.Item label="UI Designing" value="ui" />
-                                            <Select.Item label="Backend Development" value="backend" />
+                                            <Select.Item label='UX Research' value='ux' />
+                                            <Select.Item label='Web Development' value='web' />
+                                            <Select.Item label='Cross Platform Development' value='cross' />
+                                            <Select.Item label='UI Designing' value='ui' />
+                                            <Select.Item label='Backend Development' value='backend' />
                                         </Select>
                                     </Box>
                                     <Box>
@@ -231,18 +232,18 @@ export function NewCharacter({ route, navigation }) {
                                             w='full'
                                             accessibilityLabel='Classe'
                                             placeholder='Classe'
-                                            borderColor='gray.300'
+                                            borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
                                                 bg: 'teal.600',
-                                                endIcon: <CheckIcon size="5" />
+                                                endIcon: <CheckIcon size='5' />
                                             }}
                                         >
-                                            <Select.Item label="UX Research" value="ux" />
-                                            <Select.Item label="Web Development" value="web" />
-                                            <Select.Item label="Cross Platform Development" value="cross" />
-                                            <Select.Item label="UI Designing" value="ui" />
-                                            <Select.Item label="Backend Development" value="backend" />
+                                            <Select.Item label='UX Research' value='ux' />
+                                            <Select.Item label='Web Development' value='web' />
+                                            <Select.Item label='Cross Platform Development' value='cross' />
+                                            <Select.Item label='UI Designing' value='ui' />
+                                            <Select.Item label='Backend Development' value='backend' />
                                         </Select>
                                     </Box>
                                     {/* apenas se o personagem ja for acima do nivel 3 */}
@@ -252,18 +253,18 @@ export function NewCharacter({ route, navigation }) {
                                             w='full'
                                             accessibilityLabel='Sub-Classe'
                                             placeholder='Sub-Classe'
-                                            borderColor='gray.300'
+                                            borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
                                                 bg: 'teal.600',
-                                                endIcon: <CheckIcon size="5" />
+                                                endIcon: <CheckIcon size='5' />
                                             }}
                                         >
-                                            <Select.Item label="UX Research" value="ux" />
-                                            <Select.Item label="Web Development" value="web" />
-                                            <Select.Item label="Cross Platform Development" value="cross" />
-                                            <Select.Item label="UI Designing" value="ui" />
-                                            <Select.Item label="Backend Development" value="backend" />
+                                            <Select.Item label='UX Research' value='ux' />
+                                            <Select.Item label='Web Development' value='web' />
+                                            <Select.Item label='Cross Platform Development' value='cross' />
+                                            <Select.Item label='UI Designing' value='ui' />
+                                            <Select.Item label='Backend Development' value='backend' />
                                         </Select>
                                     </Box>
                                 </VStack>
@@ -304,7 +305,7 @@ export function NewCharacter({ route, navigation }) {
                                 }}
                             >
                                 <View>
-                                    <HStack justifyContent='center'>
+                                    <HStack mb='10%' justifyContent='center'>
                                         <Filter
                                             type='open'
                                             title='Compra de Pontos'
@@ -323,10 +324,10 @@ export function NewCharacter({ route, navigation }) {
                                     </HStack>
 
                                     <HStack
-                                        w="full"
-                                        p={2}
-                                        borderRadius={0}
                                         alignItems='center'
+                                        w='full'
+                                        borderRadius={0}
+                                        p={2}
                                     >
                                         <Box w='30%'>
                                             <Text fontSize='5xl' alignSelf='center'>24</Text>
@@ -336,7 +337,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Força</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(strenth, setStrenth) }}
@@ -354,7 +355,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Destreza</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(dexterity, setDexterity) }}
@@ -372,7 +373,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Constituição</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(constituition, setConstituition) }}
@@ -390,7 +391,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Inteligência</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(intelligence, setIntelligence) }}
@@ -408,7 +409,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Sabedoria</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(wisdom, setWisdom) }}
@@ -426,7 +427,7 @@ export function NewCharacter({ route, navigation }) {
                                             <HStack justifyContent='space-between' mb={2}>
                                                 <Text fontSize='lg'>Carisma</Text>
 
-                                                <HStack w="103px" justifyContent='space-between'>
+                                                <HStack w='103px' justifyContent='space-between'>
                                                     <ButtonIcons
                                                         as={<MinusCircle />}
                                                         onPress={() => { less(charisma, setCharisma) }}
