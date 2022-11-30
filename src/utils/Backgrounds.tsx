@@ -10,7 +10,7 @@ export const backgrounds = [
         variant: [
             {
                 id: 1,
-                name: 'Nemnhum'
+                name: 'Nenhum'
             },
             {
                 id: 2,
@@ -25,7 +25,7 @@ export const backgrounds = [
         variant: [
             {
                 id: 1,
-                name: 'Nemnhum'
+                name: 'Nenhum'
             },
             {
                 id: 2,
@@ -40,7 +40,7 @@ export const backgrounds = [
         variant: [
             {
                 id: 1,
-                name: 'Nemnhum'
+                name: 'Nenhum'
             },
             {
                 id: 2,
@@ -67,7 +67,7 @@ export const backgrounds = [
         variant: [
             {
                 id: 1,
-                name: 'Nemnhum'
+                name: 'Nenhum'
             },
             {
                 id: 2,
@@ -82,7 +82,7 @@ export const backgrounds = [
         variant: [
             {
                 id: 1,
-                name: 'Nemnhum'
+                name: 'Nenhum'
             },
             {
                 id: 2,

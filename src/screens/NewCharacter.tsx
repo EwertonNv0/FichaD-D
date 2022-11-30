@@ -246,7 +246,7 @@ export function NewCharacter({ route, navigation }) {
                             {/* Formulario parte 01 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
-                                onNext={validateStepOne}
+                                // onNext={validateStepOne}
                                 errors={errorStepOne}
                             >
                                 <VStack>
