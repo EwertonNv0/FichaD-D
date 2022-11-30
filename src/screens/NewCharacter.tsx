@@ -14,6 +14,7 @@ import { Filter } from '../components/Filter';
 import { races } from '../utils/Races';
 import { classes } from '../utils/Classes';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
+import { backgrounds } from '../utils/Backgrounds';
 
 export function NewCharacter({ route, navigation }) {
 
@@ -94,6 +95,15 @@ export function NewCharacter({ route, navigation }) {
     }
 
     // Formulário parte 02
+    const [background, setBackground] = useState('')
+    const [descriptionBg, setDescriptionBg] = useState('')
+    useEffect(() => {
+        setDescriptionBg('')
+        const findBg = backgrounds.find(bg => bg.id == parseInt(background))
+        if (findBg && findBg.description) {
+            setDescriptionBg(findBg.description)
+        }
+    },[background])
 
     // Formulário parte 03
 
@@ -420,16 +430,20 @@ export function NewCharacter({ route, navigation }) {
                                             bg: 'teal.600',
                                             endIcon: <CheckIcon size='5' />
                                         }}
-                                        onValueChange={setRace}
-                                        selectedValue={race}
+                                        onValueChange={setBackground}
+                                        selectedValue={background}
                                     >
-                                        <Select.Item
-                                            label='alguma coisa'
-                                            value='alguma coisa'
-                                            key='as'>
-                                        </Select.Item>
+                                        {backgrounds.map(bg =>
+                                            <Select.Item
+                                                label={bg.name}
+                                                value={`${bg.id}`}
+                                                key={bg.id}
+                                            >
+                                            </Select.Item>)
+                                        }
                                     </Select>
                                     <Box
+                                        w='full'
                                         h={80}
                                         mt={10}
                                         p={4}
@@ -439,10 +453,7 @@ export function NewCharacter({ route, navigation }) {
                                     >
                                         <ScrollTemplate>
                                             <Text fontSize='md'>
-                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti ratione delectus cumque facere, id possimus fugiat magnam eos sit alias obcaecati porro, accusantium est reprehenderit ad quis soluta. Repudiandae, consequuntur.
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus maiores incidunt quos. Unde consequuntur impedit quam debitis. Maiores dicta temporibus architecto nulla, dignissimos corporis beatae in iste sunt quidem magnam.
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione nesciunt at explicabo delectus praesentium voluptatem debitis ullam quam quasi labore qui repellat repudiandae aperiam et veniam eum ea, dignissimos ex.
-                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit in quibusdam ut id ea! Deserunt iure expedita sapiente incidunt illo libero, inventore minus perferendis cupiditate. Corrupti beatae architecto perspiciatis eius.
+                                                {descriptionBg}
                                             </Text>
                                         </ScrollTemplate>
                                     </Box>
