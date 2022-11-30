@@ -13,12 +13,13 @@ import { more, less } from '../utils/Attributes';
 import { Filter } from '../components/Filter';
 import { races } from '../utils/Races';
 import { classes } from '../utils/Classes';
+import { ScrollTemplate } from '../components/template/ScrollTemplate';
 
 export function NewCharacter({ route, navigation }) {
 
     // Formulario parte 01
-    const [isLoading,     setIsLoading] = useState(false)
-    const [charRegister,  setCharResgister] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [charRegister, setCharResgister] = useState(false)
     const [avisoCadastro, setAvisoCadastro] = useState('')
 
     const [errorStepOne, setErroStepOne] = useState(false)
@@ -27,9 +28,9 @@ export function NewCharacter({ route, navigation }) {
     const [classe, setClasse] = useState('')
     const [subClasse, setSubClasse] = useState('')
     const [varianteClasse, setVarianteClasse] = useState('')
-    const [race,   setRace] = useState('')
+    const [race, setRace] = useState('')
     const [subRace, setSubRace] = useState('')
-    const [level,  setLevel] = useState('')
+    const [level, setLevel] = useState('')
 
     const [listSubRace, setListSubRace] = useState([])
     const [listSubClasse, setListSubClasse] = useState([])
@@ -100,12 +101,12 @@ export function NewCharacter({ route, navigation }) {
     // Formulário parte 04
     const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
 
-    const [strenth,       setStrenth] = useState(8)
-    const [dexterity,     setDexterity] = useState(8)
+    const [strenth, setStrenth] = useState(8)
+    const [dexterity, setDexterity] = useState(8)
     const [constituition, setConstituition] = useState(8)
-    const [intelligence,  setIntelligence] = useState(8)
-    const [wisdom,        setWisdom] = useState(8)
-    const [charisma,      setCharisma] = useState(8)
+    const [intelligence, setIntelligence] = useState(8)
+    const [wisdom, setWisdom] = useState(8)
+    const [charisma, setCharisma] = useState(8)
 
     // Formulário parte 05
 
@@ -163,7 +164,7 @@ export function NewCharacter({ route, navigation }) {
         {
             const raca = races.find(r => r.id == parseInt(race))
 
-            if(raca && raca.subRaces){
+            if (raca && raca.subRaces) {
                 setListSubRace(raca.subRaces)
             }
         }
@@ -180,7 +181,7 @@ export function NewCharacter({ route, navigation }) {
         {
             const class_alvo = classes.find(r => r.id == parseInt(classe))
 
-            if(class_alvo && class_alvo.subClass){
+            if (class_alvo && class_alvo.subClass) {
                 setSubClasseDescription(class_alvo.subClassDescription)
                 setListSubClasse(class_alvo.subClass)
             }
@@ -195,8 +196,8 @@ export function NewCharacter({ route, navigation }) {
         if(subClasse)
         {
             const subClasseAlvo = listSubClasse.find(r => r.id == parseInt(subClasse))
-            
-            if(subClasseAlvo && subClasseAlvo.variant){
+
+            if (subClasseAlvo && subClasseAlvo.variant) {
                 setVariantDescriprion(subClasseAlvo.variantDescription)
                 setListVarianteClasse(subClasseAlvo.variant)
             }
@@ -288,39 +289,39 @@ export function NewCharacter({ route, navigation }) {
                                             onValueChange={setRace}
                                             selectedValue={race}
                                         >
-                                            {races.map(race => 
+                                            {races.map(race =>
                                                 <Select.Item
-                                                label={race.name}
-                                                value={`${race.id}`}
-                                                key={race.id}>
+                                                    label={race.name}
+                                                    value={`${race.id}`}
+                                                    key={race.id}>
                                                 </Select.Item>)}
                                         </Select>
                                     </Box>
                                     {/* Apenas se a raça possuir uma variação */}
                                     {listSubRace.length > 0 &&
-                                    <Box>
-                                        <Select
-                                            mt={1}
-                                            w='full'
-                                            accessibilityLabel='Sub-Raça'
-                                            placeholder='Sub-Raça'
-                                            borderColor='gray.700'
-                                            fontSize='md'
-                                            _selectedItem={{
-                                                bg: 'teal.600',
-                                                endIcon: <CheckIcon size='5' />
-                                            }}
-                                            onValueChange={setSubRace}
-                                            selectedValue={subRace}
-                                        >
-                                            {listSubRace.map(race => 
-                                                <Select.Item
-                                                label={race.name}
-                                                value={`${race.id}`}
-                                                key={race.id}>
-                                                </Select.Item>)}
-                                        </Select>
-                                    </Box>
+                                        <Box>
+                                            <Select
+                                                mt={1}
+                                                w='full'
+                                                accessibilityLabel='Sub-Raça'
+                                                placeholder='Sub-Raça'
+                                                borderColor='gray.700'
+                                                fontSize='md'
+                                                _selectedItem={{
+                                                    bg: 'teal.600',
+                                                    endIcon: <CheckIcon size='5' />
+                                                }}
+                                                onValueChange={setSubRace}
+                                                selectedValue={subRace}
+                                            >
+                                                {listSubRace.map(race =>
+                                                    <Select.Item
+                                                        label={race.name}
+                                                        value={`${race.id}`}
+                                                        key={race.id}>
+                                                    </Select.Item>)}
+                                            </Select>
+                                        </Box>
                                     }
                                     <Box>
                                         <Select
@@ -337,64 +338,64 @@ export function NewCharacter({ route, navigation }) {
                                             onValueChange={setClasse}
                                             selectedValue={classe}
                                         >
-                                            {classes.map(race => 
+                                            {classes.map(race =>
                                                 <Select.Item
-                                                label={race.name}
-                                                value={`${race.id}`}
-                                                key={race.id}>
+                                                    label={race.name}
+                                                    value={`${race.id}`}
+                                                    key={race.id}>
                                                 </Select.Item>)}
                                         </Select>
                                     </Box>
                                     {/* apenas se o personagem ja for acima do nivel 3 */}
                                     {listSubClasse.length > 0 &&
-                                    <Box>
-                                        <Select
-                                            mt={1}
-                                            w='full'
-                                            accessibilityLabel={subClasseDescription}
-                                            placeholder={subClasseDescription}
-                                            borderColor='gray.700'
-                                            fontSize='md'
-                                            _selectedItem={{
-                                                bg: 'teal.600',
-                                                endIcon: <CheckIcon size='5' />
-                                            }}
-                                            onValueChange={setSubClasse}
-                                            selectedValue={subClasse}
-                                        >
-                                            {listSubClasse.map(classe => 
-                                                <Select.Item
-                                                label={classe.name}
-                                                value={`${classe.id}`}
-                                                key={classe.id}>
-                                                </Select.Item>)}
-                                        </Select>
-                                    </Box>
+                                        <Box>
+                                            <Select
+                                                mt={1}
+                                                w='full'
+                                                accessibilityLabel={subClasseDescription}
+                                                placeholder={subClasseDescription}
+                                                borderColor='gray.700'
+                                                fontSize='md'
+                                                _selectedItem={{
+                                                    bg: 'teal.600',
+                                                    endIcon: <CheckIcon size='5' />
+                                                }}
+                                                onValueChange={setSubClasse}
+                                                selectedValue={subClasse}
+                                            >
+                                                {listSubClasse.map(classe =>
+                                                    <Select.Item
+                                                        label={classe.name}
+                                                        value={`${classe.id}`}
+                                                        key={classe.id}>
+                                                    </Select.Item>)}
+                                            </Select>
+                                        </Box>
                                     }
                                     {listVariantClasse.length > 0 &&
-                                    <Box>
-                                        <Select
-                                            mt={1}
-                                            w='full'
-                                            accessibilityLabel={variantDescription}
-                                            placeholder={variantDescription}
-                                            borderColor='gray.700'
-                                            fontSize='md'
-                                            _selectedItem={{
-                                                bg: 'teal.600',
-                                                endIcon: <CheckIcon size='5' />
-                                            }}
-                                            onValueChange={setVarianteClasse}
-                                            selectedValue={varianteClasse}
-                                        >
-                                            {listVariantClasse.map(classe => 
-                                                <Select.Item
-                                                label={classe.name}
-                                                value={`${classe.id}`}
-                                                key={classe.id}>
-                                                </Select.Item>)}
-                                        </Select>
-                                    </Box>
+                                        <Box>
+                                            <Select
+                                                mt={1}
+                                                w='full'
+                                                accessibilityLabel={variantDescription}
+                                                placeholder={variantDescription}
+                                                borderColor='gray.700'
+                                                fontSize='md'
+                                                _selectedItem={{
+                                                    bg: 'teal.600',
+                                                    endIcon: <CheckIcon size='5' />
+                                                }}
+                                                onValueChange={setVarianteClasse}
+                                                selectedValue={varianteClasse}
+                                            >
+                                                {listVariantClasse.map(classe =>
+                                                    <Select.Item
+                                                        label={classe.name}
+                                                        value={`${classe.id}`}
+                                                        key={classe.id}>
+                                                    </Select.Item>)}
+                                            </Select>
+                                        </Box>
                                     }
                                 </VStack>
                             </ProgressStep>
@@ -408,7 +409,43 @@ export function NewCharacter({ route, navigation }) {
                                 }}
                             >
                                 <View alignItems='center'>
-                                    <Text>Lista com antecedentes em que tocando em um ele diz os bonus recebidos por ele</Text>
+                                    <Select
+                                        mt={1}
+                                        w='full'
+                                        accessibilityLabel='Antecedentes'
+                                        placeholder='Antecedentes'
+                                        borderColor='gray.700'
+                                        fontSize='md'
+                                        _selectedItem={{
+                                            bg: 'teal.600',
+                                            endIcon: <CheckIcon size='5' />
+                                        }}
+                                        onValueChange={setRace}
+                                        selectedValue={race}
+                                    >
+                                        <Select.Item
+                                            label='alguma coisa'
+                                            value='alguma coisa'
+                                            key='as'>
+                                        </Select.Item>
+                                    </Select>
+                                    <Box
+                                        h={80}
+                                        mt={10}
+                                        p={4}
+                                        borderWidth={1}
+                                        borderColor='gray.500'
+                                        borderRadius='md'
+                                    >
+                                        <ScrollTemplate>
+                                            <Text fontSize='md'>
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti ratione delectus cumque facere, id possimus fugiat magnam eos sit alias obcaecati porro, accusantium est reprehenderit ad quis soluta. Repudiandae, consequuntur.
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus maiores incidunt quos. Unde consequuntur impedit quam debitis. Maiores dicta temporibus architecto nulla, dignissimos corporis beatae in iste sunt quidem magnam.
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione nesciunt at explicabo delectus praesentium voluptatem debitis ullam quam quasi labore qui repellat repudiandae aperiam et veniam eum ea, dignissimos ex.
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit in quibusdam ut id ea! Deserunt iure expedita sapiente incidunt illo libero, inventore minus perferendis cupiditate. Corrupti beatae architecto perspiciatis eius.
+                                            </Text>
+                                        </ScrollTemplate>
+                                    </Box>
                                 </View>
                             </ProgressStep>
 
