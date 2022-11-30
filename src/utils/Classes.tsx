@@ -54,7 +54,7 @@ export const classes = [
                         name: 'Lobo'
                     },
                     {
-                        id: 1,
+                        id: 3,
                         name: 'Urso'
                     }
                 ]
