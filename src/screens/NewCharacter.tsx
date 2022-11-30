@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Center, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
@@ -11,6 +11,8 @@ import { ButtonIcons } from '../components/ButtonIcons';
 import { MinusCircle, PlusCircle } from 'phosphor-react-native';
 import { more, less } from '../utils/Attributes';
 import { Filter } from '../components/Filter';
+import { races } from '../utils/Races';
+import { classes } from '../utils/Classes';
 
 export function NewCharacter({ route, navigation }) {
 
@@ -20,12 +22,24 @@ export function NewCharacter({ route, navigation }) {
     const [avisoCadastro, setAvisoCadastro] = useState('')
 
     const [name,   setName] = useState('')
-    const [classe, setClass] = useState('')
+    const [classe, setClasse] = useState('')
+    const [subClasse, setSubClasse] = useState('')
+    const [varianteClasse, setVarianteClasse] = useState('')
     const [race,   setRace] = useState('')
+    const [subRace, setSubRace] = useState('')
     const [level,  setLevel] = useState('')
 
-    // Formulário parte 02
+    const [listSubRace, setListSubRace] = useState([])
+    const [listSubClasse, setListSubClasse] = useState([])
+    const [subClasseDescription, setSubClasseDescription] = useState('')
+    const [listVariantClasse, setListVarianteClasse] = useState([])
+    const [variantDescription, setVariantDescriprion] = useState('')
 
+    const validateStepOne = () => {
+        console.log('ok')
+    }
+
+    // Formulário parte 02
 
     // Formulário parte 03
 
@@ -82,6 +96,65 @@ export function NewCharacter({ route, navigation }) {
         }
     }
 
+    // LIMPA DADOS DE CLASSE E RAÇA
+    useEffect(() => {
+        setRace('')
+        setClasse('')
+    }, [])
+
+    // ATUALIZA A LISTA DE SUB-RAÇAS
+    useEffect(() => {
+        if(race)
+        {
+            setSubRace('')
+
+            const raca = races.find(r => r.id == parseInt(race))
+
+            if(raca && raca.subRaces){
+                setListSubRace(raca.subRaces)
+            }else
+            {
+                setListSubRace([])
+            }
+        }
+    }, [race])
+
+    // ATUALIZA A LISTA DE SUB-CLASSES
+    useEffect(() => {
+        
+        if(classe)
+        {
+            setSubClasse('')
+            setVarianteClasse('')
+            setListSubClasse([])
+            setListVarianteClasse([])
+
+            const class_alvo = classes.find(r => r.id == parseInt(classe))
+
+            if(class_alvo && class_alvo.subClass){
+                setSubClasseDescription(class_alvo.subClassDescription)
+                setListSubClasse(class_alvo.subClass)
+            }
+        }
+    }, [classe])
+
+    // ATUALIZA A LISTA DE VARIANTES DA SUB-CLASSE
+    useEffect(() => {
+        
+        if(subClasse)
+        {
+            setVarianteClasse('')
+            setListVarianteClasse([])
+
+            const subClasseAlvo = listSubClasse.find(r => r.id == parseInt(subClasse))
+            
+            if(subClasseAlvo && subClasseAlvo.variant){
+                setVariantDescriprion(subClasseAlvo.variantDescription)
+                setListVarianteClasse(subClasseAlvo.variant)
+            }
+        }
+    }, [subClasse])
+
     return (
         <PrimaryTemplate>
             <VStack flex={1}>
@@ -91,6 +164,23 @@ export function NewCharacter({ route, navigation }) {
 
                 <WhiteTemplate>
                     <VStack flex={1}>
+                        <View>
+                            {/* ALERTAS DE CADASTRO */}
+                            {charRegister &&
+                                <AlertBox
+                                    title='Cadastro de Personagem'
+                                    content='Personagem Cadastrado com Sucesso'
+                                    type='success'
+                                />
+                            }
+                            {avisoCadastro &&
+                                <AlertBox
+                                    title='Cadastro de Personagem'
+                                    content={avisoCadastro}
+                                    type='error'
+                                />
+                            }
+                        </View>
                         <ProgressSteps
                             progressBarColor='transparent'
                             disabledStepIconColor='transparent'
@@ -104,72 +194,19 @@ export function NewCharacter({ route, navigation }) {
                             marginBottom={0}
                             topOffset={0}
                         >
-
                             {/* Formulario parte 01 */}
                             <ProgressStep
                                 nextBtnText='Próximo'
+                                onNext={validateStepOne}
                             >
-                                <View>
-                                    {charRegister &&
-                                        <AlertBox
-                                            title='Cadastro de Personagem'
-                                            content='Personagem Cadastrado com Sucesso'
-                                            type='success'
-                                        />
-                                    }
-                                    {avisoCadastro &&
-                                        <AlertBox
-                                            title='Cadastro de Personagem'
-                                            content={avisoCadastro}
-                                            type='error'
-                                        />
-                                    }
-                                    <BasicInput
-                                        placeholder='Nome do Personagem'
-                                        onChangeText={setName}
-                                        value={name}
-                                        color='black'
-                                    />
-
-                                    <BasicInput
-                                        placeholder='Classe'
-                                        onChangeText={setClass}
-                                        value={classe}
-                                        color='black'
-                                    />
-
-                                    <BasicInput
-                                        placeholder='Raça'
-                                        onChangeText={setRace}
-                                        value={race}
-                                        color='black'
-                                    />
-
-                                    <BasicInput
-                                        keyboardType='numeric'
-                                        placeholder='Nível'
-                                        onChangeText={setLevel}
-                                        value={level}
-                                        color='black'
-                                    />
-
-                                    <Button
-                                        onPress={registerCharacter}
-                                        mt={3}
-                                        isLoading={isLoading}
-                                    >
-                                        Criar Personagem
-                                    </Button>
-                                </View>
-
-                                <Text py={10}>Daqui pra baixo não precisa preeencher</Text>
-
                                 <VStack>
                                     <HStack justifyContent='space-between' mb={2}>
                                         <BasicInput
                                             w='75%'
                                             placeholder='Nome'
                                             color='black'
+                                            onChangeText={setName}
+                                            value={name}
                                             _focus={{
                                                 color: 'black'
                                             }}
@@ -179,6 +216,8 @@ export function NewCharacter({ route, navigation }) {
                                             placeholder='Nivel'
                                             keyboardType='numeric'
                                             maxLength={2}
+                                            onChangeText={setLevel}
+                                            value={level}
                                             color='black'
                                             _focus={{
                                                 color: 'black'
@@ -197,15 +236,19 @@ export function NewCharacter({ route, navigation }) {
                                                 bg: 'teal.600',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
+                                            onValueChange={setRace}
+                                            selectedValue={race}
                                         >
-                                            <Select.Item label='UX Research' value='ux' />
-                                            <Select.Item label='Web Development' value='web' />
-                                            <Select.Item label='Cross Platform Development' value='cross' />
-                                            <Select.Item label='UI Designing' value='ui' />
-                                            <Select.Item label='Backend Development' value='backend' />
+                                            {races.map(race => 
+                                                <Select.Item
+                                                label={race.name}
+                                                value={`${race.id}`}
+                                                key={race.id}>
+                                                </Select.Item>)}
                                         </Select>
                                     </Box>
                                     {/* Apenas se a raça possuir uma variação */}
+                                    {listSubRace.length > 0 &&
                                     <Box>
                                         <Select
                                             mt={1}
@@ -218,14 +261,18 @@ export function NewCharacter({ route, navigation }) {
                                                 bg: 'teal.600',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
+                                            onValueChange={setSubRace}
+                                            selectedValue={subRace}
                                         >
-                                            <Select.Item label='UX Research' value='ux' />
-                                            <Select.Item label='Web Development' value='web' />
-                                            <Select.Item label='Cross Platform Development' value='cross' />
-                                            <Select.Item label='UI Designing' value='ui' />
-                                            <Select.Item label='Backend Development' value='backend' />
+                                            {listSubRace.map(race => 
+                                                <Select.Item
+                                                label={race.name}
+                                                value={`${race.id}`}
+                                                key={race.id}>
+                                                </Select.Item>)}
                                         </Select>
                                     </Box>
+                                    }
                                     <Box>
                                         <Select
                                             mt={1}
@@ -238,35 +285,68 @@ export function NewCharacter({ route, navigation }) {
                                                 bg: 'teal.600',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
+                                            onValueChange={setClasse}
+                                            selectedValue={classe}
                                         >
-                                            <Select.Item label='UX Research' value='ux' />
-                                            <Select.Item label='Web Development' value='web' />
-                                            <Select.Item label='Cross Platform Development' value='cross' />
-                                            <Select.Item label='UI Designing' value='ui' />
-                                            <Select.Item label='Backend Development' value='backend' />
+                                            {classes.map(race => 
+                                                <Select.Item
+                                                label={race.name}
+                                                value={`${race.id}`}
+                                                key={race.id}>
+                                                </Select.Item>)}
                                         </Select>
                                     </Box>
                                     {/* apenas se o personagem ja for acima do nivel 3 */}
+                                    {listSubClasse.length > 0 &&
                                     <Box>
                                         <Select
                                             mt={1}
                                             w='full'
-                                            accessibilityLabel='Sub-Classe'
-                                            placeholder='Sub-Classe'
+                                            accessibilityLabel={subClasseDescription}
+                                            placeholder={subClasseDescription}
                                             borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
                                                 bg: 'teal.600',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
+                                            onValueChange={setSubClasse}
+                                            selectedValue={subClasse}
                                         >
-                                            <Select.Item label='UX Research' value='ux' />
-                                            <Select.Item label='Web Development' value='web' />
-                                            <Select.Item label='Cross Platform Development' value='cross' />
-                                            <Select.Item label='UI Designing' value='ui' />
-                                            <Select.Item label='Backend Development' value='backend' />
+                                            {listSubClasse.map(classe => 
+                                                <Select.Item
+                                                label={classe.name}
+                                                value={`${classe.id}`}
+                                                key={classe.id}>
+                                                </Select.Item>)}
                                         </Select>
                                     </Box>
+                                    }
+                                    {listVariantClasse.length > 0 &&
+                                    <Box>
+                                        <Select
+                                            mt={1}
+                                            w='full'
+                                            accessibilityLabel={variantDescription}
+                                            placeholder={variantDescription}
+                                            borderColor='gray.700'
+                                            fontSize='md'
+                                            _selectedItem={{
+                                                bg: 'teal.600',
+                                                endIcon: <CheckIcon size='5' />
+                                            }}
+                                            onValueChange={setVarianteClasse}
+                                            selectedValue={varianteClasse}
+                                        >
+                                            {listVariantClasse.map(classe => 
+                                                <Select.Item
+                                                label={classe.name}
+                                                value={`${classe.id}`}
+                                                key={classe.id}>
+                                                </Select.Item>)}
+                                        </Select>
+                                    </Box>
+                                    }
                                 </VStack>
                             </ProgressStep>
 
