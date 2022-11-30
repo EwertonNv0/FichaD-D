@@ -21,6 +21,8 @@ export function NewCharacter({ route, navigation }) {
     const [charRegister,  setCharResgister] = useState(false)
     const [avisoCadastro, setAvisoCadastro] = useState('')
 
+    const [errorStepOne, setErroStepOne] = useState(false)
+
     const [name,   setName] = useState('')
     const [classe, setClasse] = useState('')
     const [subClasse, setSubClasse] = useState('')
@@ -36,7 +38,58 @@ export function NewCharacter({ route, navigation }) {
     const [variantDescription, setVariantDescriprion] = useState('')
 
     const validateStepOne = () => {
-        console.log('ok')
+        // VERIFICA O NOME
+        if(name == ''){
+            setErroStepOne(true)
+            setAvisoCadastro('Você precisa inserir um nome')
+            return
+        }
+
+        // VERIFICA O NÍVEL
+        if(!parseInt(level)){
+            setErroStepOne(true)
+            setAvisoCadastro('Insira um nível válido')
+            return
+        }
+
+        // VERIFICA A RAÇA
+        if(race == ''){
+            setErroStepOne(true)
+            setAvisoCadastro('Você precisa escolher uma raça')
+            return
+        }
+
+        // VERIFICA A SUB-RAÇA
+        if(listSubRace.length > 0 && subRace == ''){
+            setErroStepOne(true)
+            setAvisoCadastro('Você precisa escolher uma sub-raça')
+            return
+        }
+
+        // VERIFICA A CLASSE
+        if(classe == ''){
+            setErroStepOne(true)
+            setAvisoCadastro('Você precisa escolher uma classe')
+            return
+        }
+
+        // VERIFICA A SUB-CLASSE
+        if(listSubClasse.length > 0 && subClasse == ''){
+            setErroStepOne(true)
+            setAvisoCadastro(`Você precisa escolher um(a) ${subClasseDescription}`)
+            return
+        }
+
+        // VERIFICA A SUB-CLASSE
+        if(listVariantClasse.length > 0 && varianteClasse == ''){
+            setErroStepOne(true)
+            setAvisoCadastro(`Você precisa escolher um(a) ${variantDescription}`)
+            return
+        }
+
+
+        setAvisoCadastro('')
+        setErroStepOne(false)
     }
 
     // Formulário parte 02
@@ -104,31 +157,27 @@ export function NewCharacter({ route, navigation }) {
 
     // ATUALIZA A LISTA DE SUB-RAÇAS
     useEffect(() => {
+        setSubRace('')
+        setListSubRace([])
         if(race)
         {
-            setSubRace('')
-
             const raca = races.find(r => r.id == parseInt(race))
 
             if(raca && raca.subRaces){
                 setListSubRace(raca.subRaces)
-            }else
-            {
-                setListSubRace([])
             }
         }
     }, [race])
 
     // ATUALIZA A LISTA DE SUB-CLASSES
     useEffect(() => {
-        
+        setSubClasse('')
+        setVarianteClasse('')
+        setListSubClasse([])
+        setListVarianteClasse([])
+
         if(classe)
         {
-            setSubClasse('')
-            setVarianteClasse('')
-            setListSubClasse([])
-            setListVarianteClasse([])
-
             const class_alvo = classes.find(r => r.id == parseInt(classe))
 
             if(class_alvo && class_alvo.subClass){
@@ -140,12 +189,11 @@ export function NewCharacter({ route, navigation }) {
 
     // ATUALIZA A LISTA DE VARIANTES DA SUB-CLASSE
     useEffect(() => {
+        setVarianteClasse('')
+        setListVarianteClasse([])
         
         if(subClasse)
         {
-            setVarianteClasse('')
-            setListVarianteClasse([])
-
             const subClasseAlvo = listSubClasse.find(r => r.id == parseInt(subClasse))
             
             if(subClasseAlvo && subClasseAlvo.variant){
@@ -198,6 +246,7 @@ export function NewCharacter({ route, navigation }) {
                             <ProgressStep
                                 nextBtnText='Próximo'
                                 onNext={validateStepOne}
+                                errors={errorStepOne}
                             >
                                 <VStack>
                                     <HStack justifyContent='space-between' mb={2}>
