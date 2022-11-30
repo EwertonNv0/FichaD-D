@@ -2,11 +2,13 @@ export const backgrounds = [
     {
         id: 1,
         name: 'Acólito',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut voluptates rem dignissimos? Magni dicta sit veniam ipsum recusandae doloribus totam cum aspernatur odit corporis, repudiandae, vero error illum a facere.'
     },
     {
         id: 2,
         name: 'Artesão da Guilda',
         variantDescription: 'Variação',
+        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt placeat consectetur libero qui. Non deleniti natus fugiat sit alias quod, suscipit ab, quasi quaerat sunt voluptatibus omnis quae tenetur deserunt?',
         variant: [
             {
                 id: 1,
@@ -14,7 +16,8 @@ export const backgrounds = [
             },
             {
                 id: 2,
-                name: 'Mercador de Guilda'
+                name: 'Mercador de Guilda',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit fugiat ad consequuntur explicabo, nostrum, aliquam cumque rem placeat ab tempora in reiciendis omnis quidem totam rerum eveniet! Assumenda, tempore accusantium.'
             }
         ]
     },
