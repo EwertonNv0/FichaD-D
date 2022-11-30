@@ -2,17 +2,18 @@ export const races = [
     {
         id: 1,
         name: 'Humano',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Variante'
             }
         ]
     },
+
     {
         id: 2,
         name: 'Elfo',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Alto Elfo'
@@ -24,23 +25,25 @@ export const races = [
             {
                 id: 3,
                 name: 'Elfo Negro (Drow)'
-            },
+            }
         ]
     },
+
     {
         id: 3,
         name: 'Anão',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Duergar'
             }
         ]
     },
+
     {
         id: 4,
         name: 'Halfling',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Pés Leves'
@@ -51,22 +54,26 @@ export const races = [
             },
         ]
     },
+
     {
         id: 5,
         name: 'Meio-Elfo'
     },
+
     {
         id: 6,
         name: 'Meio-Orc'
     },
+
     {
         id: 7,
         name: 'Tiefling'
     },
+
     {
         id: 8,
         name: 'Draconato',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Azul (Elétrico)'
@@ -109,10 +116,11 @@ export const races = [
             },
         ]
     },
+
     {
         id: 9,
         name: 'Gnomo',
-        subClass: [
+        subRaces: [
             {
                 id: 1,
                 name: 'Da Floresta'
