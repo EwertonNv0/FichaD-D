@@ -5,6 +5,10 @@ export const races = [
         subRaces: [
             {
                 id: 1,
+                name: 'Padrão'
+            },
+            {
+                id: 2,
                 name: 'Variante'
             }
         ]
@@ -35,6 +39,10 @@ export const races = [
         subRaces: [
             {
                 id: 1,
+                name: 'Padrão'
+            },
+            {
+                id: 2,
                 name: 'Duergar'
             }
         ]
