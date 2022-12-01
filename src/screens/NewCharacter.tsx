@@ -25,7 +25,7 @@ export function NewCharacter({ route, navigation }) {
 
     const [errorStepOne, setErroStepOne] = useState(false)
 
-    const [name,   setName] = useState('')
+    const [name, setName] = useState('')
     const [classe, setClasse] = useState('')
     const [subClasse, setSubClasse] = useState('')
     const [varianteClasse, setVarianteClasse] = useState('')
@@ -41,49 +41,49 @@ export function NewCharacter({ route, navigation }) {
 
     const validateStepOne = () => {
         // VERIFICA O NOME
-        if(name == ''){
+        if (name == '') {
             setErroStepOne(true)
             setAvisoCadastro('Você precisa inserir um nome')
             return
         }
 
         // VERIFICA O NÍVEL
-        if(!parseInt(level)){
+        if (!parseInt(level)) {
             setErroStepOne(true)
             setAvisoCadastro('Insira um nível válido')
             return
         }
 
         // VERIFICA A RAÇA
-        if(race == ''){
+        if (race == '') {
             setErroStepOne(true)
             setAvisoCadastro('Você precisa escolher uma raça')
             return
         }
 
         // VERIFICA A SUB-RAÇA
-        if(listSubRace.length > 0 && subRace == ''){
+        if (listSubRace.length > 0 && subRace == '') {
             setErroStepOne(true)
             setAvisoCadastro('Você precisa escolher uma sub-raça')
             return
         }
 
         // VERIFICA A CLASSE
-        if(classe == ''){
+        if (classe == '') {
             setErroStepOne(true)
             setAvisoCadastro('Você precisa escolher uma classe')
             return
         }
 
         // VERIFICA A SUB-CLASSE
-        if(listSubClasse.length > 0 && subClasse == ''){
+        if (listSubClasse.length > 0 && subClasse == '') {
             setErroStepOne(true)
             setAvisoCadastro(`Você precisa escolher um(a) ${subClasseDescription}`)
             return
         }
 
         // VERIFICA A SUB-CLASSE
-        if(listVariantClasse.length > 0 && varianteClasse == ''){
+        if (listVariantClasse.length > 0 && varianteClasse == '') {
             setErroStepOne(true)
             setAvisoCadastro(`Você precisa escolher um(a) ${variantDescription}`)
             return
@@ -103,7 +103,7 @@ export function NewCharacter({ route, navigation }) {
         if (findBg && findBg.description) {
             setDescriptionBg(findBg.description)
         }
-    },[background])
+    }, [background])
 
     // Formulário parte 03
 
@@ -170,8 +170,7 @@ export function NewCharacter({ route, navigation }) {
     useEffect(() => {
         setSubRace('')
         setListSubRace([])
-        if(race)
-        {
+        if (race) {
             const raca = races.find(r => r.id == parseInt(race))
 
             if (raca && raca.subRaces) {
@@ -187,8 +186,7 @@ export function NewCharacter({ route, navigation }) {
         setListSubClasse([])
         setListVarianteClasse([])
 
-        if(classe)
-        {
+        if (classe) {
             const class_alvo = classes.find(r => r.id == parseInt(classe))
 
             if (class_alvo && class_alvo.subClass) {
@@ -202,9 +200,8 @@ export function NewCharacter({ route, navigation }) {
     useEffect(() => {
         setVarianteClasse('')
         setListVarianteClasse([])
-        
-        if(subClasse)
-        {
+
+        if (subClasse) {
             const subClasseAlvo = listSubClasse.find(r => r.id == parseInt(subClasse))
 
             if (subClasseAlvo && subClasseAlvo.variant) {
@@ -240,6 +237,7 @@ export function NewCharacter({ route, navigation }) {
                                 />
                             }
                         </View>
+
                         <ProgressSteps
                             progressBarColor='transparent'
                             disabledStepIconColor='transparent'
@@ -442,19 +440,64 @@ export function NewCharacter({ route, navigation }) {
                                             </Select.Item>)
                                         }
                                     </Select>
+
                                     <Box
                                         w='full'
-                                        h={80}
-                                        mt={10}
+                                        h='400px'
+                                        mt={5}
                                         p={4}
                                         borderWidth={1}
                                         borderColor='gray.500'
                                         borderRadius='md'
                                     >
                                         <ScrollTemplate>
-                                            <Text fontSize='md'>
-                                                {descriptionBg}
-                                            </Text>
+                                            <Box mb={1}>
+                                                <Text fontSize='sm'>
+                                                    <Text
+                                                        fontSize='sm'
+                                                        fontWeight='bold'
+                                                    >
+                                                        Proficiencia em Pericia:&nbsp;
+                                                    </Text>
+                                                    Alguma coisa
+                                                </Text>
+                                            </Box>
+
+                                            <Box mb={1}>
+                                                <Text fontSize='sm'>
+                                                    <Text
+                                                        fontSize='sm'
+                                                        fontWeight='bold'
+                                                    >
+                                                        Proficiencia em Ferramenta:&nbsp;
+                                                    </Text>
+                                                    Alguma coisa
+                                                </Text>
+                                            </Box>
+
+                                            <Box mb={1}>
+                                                <Text fontSize='sm'>
+                                                    <Text
+                                                        fontSize='sm'
+                                                        fontWeight='bold'
+                                                    >
+                                                        Idiomas:&nbsp;
+                                                    </Text>
+                                                    Alguma coisa
+                                                </Text>
+                                            </Box>
+
+                                            <Box>
+                                                <Text fontSize='sm' textAlign='justify'>
+                                                    <Text
+                                                        fontSize='sm'
+                                                        fontWeight='bold'
+                                                    >
+                                                        Característica:&nbsp;
+                                                    </Text>
+                                                    {descriptionBg}
+                                                </Text>
+                                            </Box>
                                         </ScrollTemplate>
                                     </Box>
                                 </View>
@@ -469,7 +512,43 @@ export function NewCharacter({ route, navigation }) {
                                 }}
                             >
                                 <View alignItems='center'>
-                                    <Text>Lista com talentos em que tocando em um ele diz os bonus recebidos e outra lista com as Habilidades (arcanismo, historia, investigação...)</Text>
+                                    <Select
+                                        mt={1}
+                                        w='full'
+                                        accessibilityLabel='Antecedentes'
+                                        placeholder='Antecedentes'
+                                        borderColor='gray.700'
+                                        fontSize='md'
+                                        _selectedItem={{
+                                            bg: 'teal.600',
+                                            endIcon: <CheckIcon size='5' />
+                                        }}
+                                        onValueChange={setBackground}
+                                        selectedValue={background}
+                                    >
+                                        <Select.Item
+                                            label='asdasd'
+                                            value='qweqwe'
+                                            key='asds'
+                                        >
+                                        </Select.Item>
+                                    </Select>
+
+                                    <Box
+                                        w='full'
+                                        h='400px'
+                                        mt={5}
+                                        p={4}
+                                        borderWidth={1}
+                                        borderColor='gray.500'
+                                        borderRadius='md'
+                                    >
+                                        <ScrollTemplate>
+                                            <Text fontSize='sm' textAlign='justify'>
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod neque tenetur possimus aliquid. Dolorum repellat vero consequuntur laborum tempore cumque commodi facere provident optio autem nisi, odio non eius ea.
+                                            </Text>
+                                        </ScrollTemplate>
+                                    </Box>
                                 </View>
                             </ProgressStep>
 
