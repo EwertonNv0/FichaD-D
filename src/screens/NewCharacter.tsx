@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Center, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
+import { Box, Button, CheckIcon, Heading, HStack, Select, Text, View, VStack } from 'native-base';
 import { PrimaryTemplate } from '../components/template/PrimaryTemplate';
 import { WhiteTemplate } from '../components/template/WhiteTemplate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,13 +8,14 @@ import { AlertBox } from '../components/AlertBox';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { BasicInput } from '../components/BasicInput';
 import { ButtonIcons } from '../components/ButtonIcons';
-import { MinusCircle, PlusCircle } from 'phosphor-react-native';
+import { ArrowLeft, CaretLeft, MinusCircle, PlusCircle } from 'phosphor-react-native';
 import { more, less } from '../utils/Attributes';
 import { Filter } from '../components/Filter';
 import { races } from '../utils/Races';
 import { classes } from '../utils/Classes';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { backgrounds } from '../utils/Backgrounds';
+import { BackButton } from '../components/BackButton';
 
 export function NewCharacter({ route, navigation }) {
 
@@ -93,36 +94,6 @@ export function NewCharacter({ route, navigation }) {
         setAvisoCadastro('')
         setErroStepOne(false)
     }
-
-    // Formulário parte 02
-    const [background, setBackground] = useState('')
-    const [descriptionBg, setDescriptionBg] = useState('')
-    useEffect(() => {
-        setDescriptionBg('')
-        const findBg = backgrounds.find(bg => bg.id == parseInt(background))
-        if (findBg && findBg.description) {
-            setDescriptionBg(findBg.description)
-        }
-    }, [background])
-
-    // Formulário parte 03
-
-
-    // Formulário parte 04
-    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
-
-    const [strenth, setStrenth] = useState(8)
-    const [dexterity, setDexterity] = useState(8)
-    const [constituition, setConstituition] = useState(8)
-    const [intelligence, setIntelligence] = useState(8)
-    const [wisdom, setWisdom] = useState(8)
-    const [charisma, setCharisma] = useState(8)
-
-    // Formulário parte 05
-
-
-    // Formulário parte 06
-
 
     const registerCharacter = async () => {
         if (isLoading) return
@@ -211,12 +182,45 @@ export function NewCharacter({ route, navigation }) {
         }
     }, [subClasse])
 
+    // Formulário parte 02
+    const [background, setBackground] = useState('')
+    const [descriptionBg, setDescriptionBg] = useState('')
+    useEffect(() => {
+        setDescriptionBg('')
+        const findBg = backgrounds.find(bg => bg.id == parseInt(background))
+        if (findBg && findBg.description) {
+            setDescriptionBg(findBg.description)
+        }
+    }, [background])
+
+    // Formulário parte 03
+
+
+    // Formulário parte 04
+    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
+
+    const [strenth, setStrenth] = useState(8)
+    const [dexterity, setDexterity] = useState(8)
+    const [constituition, setConstituition] = useState(8)
+    const [intelligence, setIntelligence] = useState(8)
+    const [wisdom, setWisdom] = useState(8)
+    const [charisma, setCharisma] = useState(8)
+
+    // Formulário parte 05
+
+
+
     return (
         <PrimaryTemplate>
             <VStack flex={1}>
-                <Heading color='white' alignSelf='center' fontSize='2xl' my={2}>
-                    Crie um novo personagem
-                </Heading>
+
+                <HStack>
+                    <BackButton />
+
+                    <Heading color='white' alignSelf='center' fontSize='2xl' my={4}>
+                        Crie um novo personagem
+                    </Heading>
+                </HStack>
 
                 <WhiteTemplate>
                     <VStack flex={1}>
@@ -239,16 +243,16 @@ export function NewCharacter({ route, navigation }) {
                         </View>
 
                         <ProgressSteps
-                            progressBarColor='transparent'
-                            disabledStepIconColor='transparent'
-                            completedProgressBarColor='transparent'
-                            activeStepIconBorderColor='transparent'
-                            completedStepIconColor='transparent'
-                            activeStepIconColor='transparent'
-                            disabledStepNumColor='transparent'
-                            activeStepNumColor='transparent'
-                            completedCheckColor='transparent'
                             marginBottom={0}
+                            progressBarColor='#ED220E20'
+                            completedProgressBarColor='#ED220E'
+                            activeStepIconBorderColor='#ED220E'
+                            completedStepIconColor='#ED220E'
+                            disabledStepIconColor='transparent'
+                            activeStepIconColor='transparent'
+                            disabledStepNumColor='#000000'
+                            activeStepNumColor='#000000'
+                            completedCheckColor='#FFFFFF'
                             topOffset={0}
                         >
                             {/* Formulario parte 01 */}
@@ -262,36 +266,41 @@ export function NewCharacter({ route, navigation }) {
                                         <BasicInput
                                             w='75%'
                                             placeholder='Nome'
+                                            accessibilityLabel='Nome'
                                             color='black'
                                             onChangeText={setName}
                                             value={name}
                                             _focus={{
-                                                color: 'black'
+                                                color: 'black',
+                                                backgroundColor: 'transparent'
                                             }}
                                         />
                                         <BasicInput
                                             w='20%'
-                                            placeholder='Nivel'
+                                            accessibilityLabel='Nível'
+                                            placeholder='Nível'
+                                            textAlign='center'
                                             keyboardType='numeric'
                                             maxLength={2}
                                             onChangeText={setLevel}
                                             value={level}
                                             color='black'
                                             _focus={{
-                                                color: 'black'
+                                                color: 'black',
+                                                backgroundColor: 'transparent'
                                             }}
                                         />
                                     </HStack>
                                     <Box>
                                         <Select
-                                            mt={1}
+                                            mb={1}
                                             w='full'
-                                            accessibilityLabel='Raça'
                                             placeholder='Raça'
+                                            accessibilityLabel='Raça'
                                             borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
-                                                bg: 'teal.600',
+                                                bg: '#ED220EA9',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
                                             onValueChange={setRace}
@@ -305,18 +314,17 @@ export function NewCharacter({ route, navigation }) {
                                                 </Select.Item>)}
                                         </Select>
                                     </Box>
-                                    {/* Apenas se a raça possuir uma variação */}
                                     {listSubRace.length > 0 &&
                                         <Box>
                                             <Select
-                                                mt={1}
+                                                mb={1}
                                                 w='full'
-                                                accessibilityLabel='Sub-Raça'
                                                 placeholder='Sub-Raça'
+                                                accessibilityLabel='Sub-Raça'
                                                 borderColor='gray.700'
                                                 fontSize='md'
                                                 _selectedItem={{
-                                                    bg: 'teal.600',
+                                                    bg: '#ED220EA9',
                                                     endIcon: <CheckIcon size='5' />
                                                 }}
                                                 onValueChange={setSubRace}
@@ -340,7 +348,7 @@ export function NewCharacter({ route, navigation }) {
                                             borderColor='gray.700'
                                             fontSize='md'
                                             _selectedItem={{
-                                                bg: 'teal.600',
+                                                bg: '#ED220EA9',
                                                 endIcon: <CheckIcon size='5' />
                                             }}
                                             onValueChange={setClasse}
@@ -354,7 +362,6 @@ export function NewCharacter({ route, navigation }) {
                                                 </Select.Item>)}
                                         </Select>
                                     </Box>
-                                    {/* apenas se o personagem ja for acima do nivel 3 */}
                                     {listSubClasse.length > 0 &&
                                         <Box>
                                             <Select
@@ -365,7 +372,7 @@ export function NewCharacter({ route, navigation }) {
                                                 borderColor='gray.700'
                                                 fontSize='md'
                                                 _selectedItem={{
-                                                    bg: 'teal.600',
+                                                    bg: '#ED220EA9',
                                                     endIcon: <CheckIcon size='5' />
                                                 }}
                                                 onValueChange={setSubClasse}
@@ -390,7 +397,7 @@ export function NewCharacter({ route, navigation }) {
                                                 borderColor='gray.700'
                                                 fontSize='md'
                                                 _selectedItem={{
-                                                    bg: 'teal.600',
+                                                    bg: '#ED220EA9',
                                                     endIcon: <CheckIcon size='5' />
                                                 }}
                                                 onValueChange={setVarianteClasse}
@@ -443,7 +450,7 @@ export function NewCharacter({ route, navigation }) {
 
                                     <Box
                                         w='full'
-                                        h='400px'
+                                        h='380px'
                                         mt={5}
                                         p={4}
                                         borderWidth={1}
@@ -457,7 +464,7 @@ export function NewCharacter({ route, navigation }) {
                                                         fontSize='sm'
                                                         fontWeight='bold'
                                                     >
-                                                        Proficiencia em Pericia:&nbsp;
+                                                        Proficiência em Perícia:&nbsp;
                                                     </Text>
                                                     Alguma coisa
                                                 </Text>
@@ -469,7 +476,7 @@ export function NewCharacter({ route, navigation }) {
                                                         fontSize='sm'
                                                         fontWeight='bold'
                                                     >
-                                                        Proficiencia em Ferramenta:&nbsp;
+                                                        Proficiência em Ferramenta:&nbsp;
                                                     </Text>
                                                     Alguma coisa
                                                 </Text>
@@ -515,8 +522,8 @@ export function NewCharacter({ route, navigation }) {
                                     <Select
                                         mt={1}
                                         w='full'
-                                        accessibilityLabel='Antecedentes'
-                                        placeholder='Antecedentes'
+                                        accessibilityLabel='Talento'
+                                        placeholder='Talento'
                                         borderColor='gray.700'
                                         fontSize='md'
                                         _selectedItem={{
@@ -704,19 +711,6 @@ export function NewCharacter({ route, navigation }) {
 
                             {/* Formulario parte 05 */}
                             <ProgressStep
-                                nextBtnText='Próximo'
-                                previousBtnText='Anterior'
-                                previousBtnTextStyle={{
-                                    color: '#eb220e'
-                                }}
-                            >
-                                <View alignItems='center'>
-                                    <Text>Poder adicionar Equipamentos</Text>
-                                </View>
-                            </ProgressStep>
-
-                            {/* Formulario parte 06 */}
-                            <ProgressStep
                                 previousBtnText='Anterior'
                                 finishBtnText='Pronto!'
                                 previousBtnTextStyle={{
@@ -724,7 +718,7 @@ export function NewCharacter({ route, navigation }) {
                                 }}
                             >
                                 <View alignItems='center'>
-                                    <Text>Visão geral</Text>
+                                    <Text>Poder adicionar Equipamentos</Text>
                                 </View>
                             </ProgressStep>
                         </ProgressSteps>
