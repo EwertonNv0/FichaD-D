@@ -5,7 +5,7 @@ export const THEME = extendTheme({
     primary:{
       900: '#3D0804',
       800: '#7D1107',
-      700: '#eb220e',
+      700: '#ED220E',
       600: '#FC230F'
     },
     secondary:{
