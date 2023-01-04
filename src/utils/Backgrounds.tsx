@@ -3,7 +3,7 @@ export const backgrounds = [
         id: 1,
         name: 'Acólito',
         skills: 'Intuição, Relígião.',
-        tools: '----',
+        tools: 'Nenhum',
         language: 'Dois a sua escolha.',
         equipment: '01 - Símbolo sagrado (um presente dado quando você entrou no templo), 01 - Livro de preces ou uma conta de orações, 05 - Varetas de incenso, Vestimentas, 01 - Conjunto de roupas comuns e 01 - Algibeira contendo 15po',
         description: 'Como um acólito, você detém o respeito daqueles que compartilham de sua fé, e você pode realizar cerimônias de sua divindade. Você e seus companheiros de aventura podem até receber cura e caridade de um templo, santuário ou outro posto de sua fé, embora devam fornecer quaisquer componentes materiais necessários para as magias. Aqueles que compartilham de sua religião vão garantir a você (mas apenas você), custeando um estilo de vida modesto. Você também pode possuir laços com um templo específico devotado à sua divindade ou panteão, e fixar residência nele. Pode ser o templo que você está acostumado a servir, se ainda tiver boas relações com ele, ou um templo no qual você encontrou um novo lar. Enquanto frequentar as redondezas desse templo, você pode solicitar os sacerdotes para assisti-lo, desde que essa assistência não seja de alguma forma perigosa e que você sempre esteja em uma boa relação com seu templo.'
@@ -37,7 +37,7 @@ export const backgrounds = [
         variantDescription: 'Variação',
         skills: 'Acrobacia, Atuação.',
         tools: 'Kit de Disfarce, um tipo de instrumento musical.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Instrumento musical (à sua escolha), 01 - Presente de um admirador (carta de amor, mecha de cabelo ou uma bijuteria), 01 - Traje e 01 - Algibeira contendo 15po',
         description: 'Você sempre encontra um lugar para atuar, geralmente em tavernas ou estalagens mas, possivelmente em circos, teatros ou até em cortes nobres. Em tais lugares, você recebe alojamento e comida modesta ou de patrõesconfortáveis, de graça (dependendo da qualidade do estabelecimento), contanto que você atue a cada noite. Além disso, sua atuação torna você um tipo de figura local. Quando estranhos reconhecerem você em uma cidade em que você já tenha atuado, eles geralmente gostaram de você.',
         variant: [
@@ -59,7 +59,7 @@ export const backgrounds = [
         variantDescription: 'Variação',
         skills: 'Enganação, Furtividade.',
         tools: 'Um tipo de kit de jogo, ferramentas de ladrão.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Pé de cabra, 01 - Conjunto de roupas escuras comuns com capuz e 01 - Algibeira contendo 15po',
         description: 'Você possui contatos de confiança que agem como seusinformantes em uma rede criminosa. Você sabe como se comunicar com eles mesmo em grandes distâncias. Você conhece em especial os mensageiros locais, mestres de caravana corruptos, e marinheiros escusos que podem transmitir seus recados.',
         variant: [
@@ -100,7 +100,7 @@ export const backgrounds = [
         name: 'Herói do Povo',
         skills: 'Adestrar animais, sobrevivência.',
         tools: 'Um tipo de ferramenta de artesão, Veiculos terrestres.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Conjunto de ferramentas de artesão (à sua escolha), 01 - Pá, 01 - Pote de ferro, 01 - Conjunto de roupas comuns e 01 - Algibeira contendo 10po',
         description: 'Já que você ascendeu da categoria de pessoas comuns até onde você está agora, é fácil se misturar a eles. Você pode encontrar lugar entre os camponeses para se esconder, descansar ou se recuperar, a menos que isso ofereça um risco direto a eles. Eles o esconderão da lei e de qualquer um que venha perguntando por você, desde que não tenham que arriscar suas vidas.'
     },
@@ -111,7 +111,7 @@ export const backgrounds = [
         variantDescription: 'Variação',
         skills: 'Atletismo, percepção.',
         tools: 'Ferramentas de navegador, Veiculos aquaticos.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Malagueta (clava), 15 - Metros de corda de seda, 01 - Amuleto da sorte como um pé de coelho ou uma pequena pedra com um furo no centro (ou você pode rolar uma bugiganga da tabela Bugigangas no capítulo 5), 01 - Conjunto de trajes comuns e 01 - Algibeira contendo 10po',
         description: 'Quando você precisar, você pode conseguir passagem de graça em um navio para você e seus companheiros de aventura. Você precisa viajar no navio em que você trabalhou ou em outro navio com o qual você teve boas 139 relações (talvez um comandado por um ex-companheiro de tripulação). Por ser um favor, você não pode solicitar uma programação ou rota que atenda à todas as suas necessidades. Seu Mestre determina quanto tempo levará pra chegar aonde você quer ir. Em troca da passagem grátis, espera-se que você e seus companheiros ajudem a tripulação durante a viagem.',
         variant: [
@@ -154,7 +154,7 @@ export const backgrounds = [
         name: 'Orfão',
         skills: 'Furtividade, Prestidigitação.',
         tools: 'Kit de disfarce, Ferramentas de Ladrão.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Faca pequena, 01 - Mapa da cidade em que você cresceu, 01 - Rato de estimação, 01 - Pequeno objeto para lembrar dos seus pais, 01 - Conjunto de roupas comuns e 01 - Algibeira contendo 10po',
         description: 'Você conhece os padrões secretos e o fluxo das cidades e pode encontrar passagens através da expansão urbana que os outros deixariam passar. Quando você não estiver em combate, você (e os companheiros que você guiar) podem viajar entre dois locais quaisquer na cidade com o dobro da velocidade normalmente permitida.'
     },
@@ -163,7 +163,7 @@ export const backgrounds = [
         id: 11,
         name: 'Sábio',
         skills: 'Arcanismo, Historia.',
-        tools: '----',
+        tools: 'Nenhum',
         language: 'Dois a sua escolha.',
         equipment: '01 - Vidro de tinta escura, 01 - Pena, 01 - Faca pequena, 01 - Carta de um falecido colega perguntando a você algo que você nunca terá a chance de responder, 01 - Conjunto de roupas comuns e 01 - Algibeira contendo 10po',
         description: 'Quando tentar obter ou recuperar um fragmento de conhecimento que você não saiba, você descobre aonde e com quem pode obter essa informação. Normalmente ela será adquirida em bibliotecas, arquivos de escribas,universidade ou outros sábios e pessoas aptas. Seu Mestre pode decidir que o conhecimento que busca está escondido em algum lugar quase inacessível, ou é simplesmente impossível de se obter. Desvendar os 142 segredos mais profundos do multiverso pode requerer uma campanha inteira.'
@@ -174,7 +174,7 @@ export const backgrounds = [
         name: 'Soldado',
         skills: 'Atletismo, Intimidação.',
         tools: 'Um tipo de kit de jogo, Veiculos terrestres.',
-        language: '----',
+        language: 'Nenhum',
         equipment: '01 - Insígnia de patente, 01 - Fetiche obtido de um inimigo caído (uma adaga, lâmina partida ou tira de estandarte), 01 - Conjunto de dados de osso ou baralho, 01 - Conjunto de roupas comuns e 01 - Algibeira contendo 10po',
         description: 'Você possui uma patente militar da sua época como soldado. Soldados leais à sua antiga organização reconhecem sua autoridade e influência, e o prestam deferência se forem de uma patente mais baixa. Você pode invocar sua patente para exercer influência sobre soldados, e requisitar equipamentos simples ou cavalos para uso temporário. Você também pode ganhar acesso a acampamentos militares aliados, e fortalezas onde usa  patente é reconhecida.'
     }

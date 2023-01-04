@@ -185,11 +185,24 @@ export function NewCharacter({ route, navigation }) {
     // Formulário parte 02
     const [background, setBackground] = useState('')
     const [descriptionBg, setDescriptionBg] = useState('')
+    const [skillsBg, setSkillsBg] = useState('')
+    const [toolsBg, setToolsBg] = useState('')
+    const [langBg, setLangBg] = useState('')
+
     useEffect(() => {
         setDescriptionBg('')
+        setSkillsBg('')
+        setToolsBg('')
+        setLangBg('')
+
         const findBg = backgrounds.find(bg => bg.id == parseInt(background))
         if (findBg && findBg.description) {
             setDescriptionBg(findBg.description)
+            setSkillsBg(findBg.skills)
+            setToolsBg(findBg.tools)
+            setLangBg(findBg.language)
+
+            if(findBg.variant) console.log(findBg.variantDescription)
         }
     }, [background])
 
@@ -466,7 +479,7 @@ export function NewCharacter({ route, navigation }) {
                                                     >
                                                         Proficiência em Perícia:&nbsp;
                                                     </Text>
-                                                    Alguma coisa
+                                                    { skillsBg }
                                                 </Text>
                                             </Box>
 
@@ -478,7 +491,7 @@ export function NewCharacter({ route, navigation }) {
                                                     >
                                                         Proficiência em Ferramenta:&nbsp;
                                                     </Text>
-                                                    Alguma coisa
+                                                    { toolsBg }
                                                 </Text>
                                             </Box>
 
@@ -490,7 +503,7 @@ export function NewCharacter({ route, navigation }) {
                                                     >
                                                         Idiomas:&nbsp;
                                                     </Text>
-                                                    Alguma coisa
+                                                    { langBg }
                                                 </Text>
                                             </Box>
 
