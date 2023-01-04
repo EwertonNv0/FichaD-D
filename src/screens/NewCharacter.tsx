@@ -9,7 +9,6 @@ import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { BasicInput } from '../components/BasicInput';
 import { ButtonIcons } from '../components/ButtonIcons';
 import { ArrowLeft, CaretLeft, MinusCircle, PlusCircle } from 'phosphor-react-native';
-import { more, less } from '../utils/Attributes';
 import { Filter } from '../components/Filter';
 import { races } from '../utils/Races';
 import { classes } from '../utils/Classes';
@@ -18,6 +17,7 @@ import { backgrounds } from '../utils/Backgrounds';
 import { BackButton } from '../components/BackButton';
 import { feats } from '../utils/Feats';
 import { FeatData } from '../interfaces/FeatData';
+import { randAttributes, randBetween } from '../utils/Calcs';
 
 export function NewCharacter({ route, navigation }) {
 
@@ -220,14 +220,71 @@ export function NewCharacter({ route, navigation }) {
     }, [])
 
     // Formulário parte 04
-    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
-
+    const defaultTotalPoints = 27
+    const [statusSelected, setStatusSelected] = useState<'distributed' | 'roll' | 'pre'>('distributed')
+    const [totalPoints, setTotalPoints] = useState(defaultTotalPoints)
     const [strenth, setStrenth] = useState(8)
     const [dexterity, setDexterity] = useState(8)
     const [constituition, setConstituition] = useState(8)
     const [intelligence, setIntelligence] = useState(8)
     const [wisdom, setWisdom] = useState(8)
     const [charisma, setCharisma] = useState(8)
+
+    useEffect(() => {
+        if(statusSelected == 'distributed')
+        {
+            setTotalPoints(defaultTotalPoints)
+            setStrenth(8)
+            setDexterity(8)
+            setConstituition(8)
+            setIntelligence(8)
+            setWisdom(8)
+            setCharisma(8)
+        }
+        else if(statusSelected == 'pre')
+        {
+            setTotalPoints(0)
+            setStrenth(15)
+            setDexterity(14)
+            setConstituition(13)
+            setIntelligence(12)
+            setWisdom(10)
+            setCharisma(8)
+        }
+        else
+        {
+            setTotalPoints(0)
+            setStrenth(randAttributes())
+            setDexterity(randAttributes())
+            setConstituition(randAttributes())
+            setIntelligence(randAttributes())
+            setWisdom(randAttributes())
+            setCharisma(randAttributes())
+        }
+    }, [statusSelected])
+
+    const incrementAttribute = (state, set) => {
+        if (statusSelected == 'roll' || statusSelected == 'pre') return
+        if (totalPoints <= 0) return
+        
+        if (state < 15){
+            if(state >= 13) setTotalPoints(totalPoints - 2)
+            else setTotalPoints(totalPoints - 1)
+            set(state + 1)   
+        }
+    }
+
+    const decrementAttribute = (state, set) => {
+        if (statusSelected == 'roll' || statusSelected == 'pre') return
+        if (totalPoints >= defaultTotalPoints) return
+        
+        if (state > 8){
+            if(state >= 14) setTotalPoints(totalPoints + 2)
+            else setTotalPoints(totalPoints + 1)
+            
+            set(state - 1)
+        }
+    }
 
     // Formulário parte 05
 
@@ -599,19 +656,27 @@ export function NewCharacter({ route, navigation }) {
                                 <View>
                                     <HStack mb='10%' justifyContent='center'>
                                         <Filter
-                                            type='open'
-                                            title='Compra de Pontos'
-                                            onPress={() => setStatusSelected('open')}
-                                            isActive={statusSelected === 'open'}
-                                            borderLeftRadius='md'
+                                            type='distributed'
+                                            title='Compra'
+                                            onPress={() => setStatusSelected('distributed')}
+                                            isActive={statusSelected === 'distributed'}
+                                            borderRadius='md'
                                         />
 
                                         <Filter
-                                            type='closed'
-                                            title='Rolagem de Pontos'
-                                            onPress={() => setStatusSelected('closed')}
-                                            isActive={statusSelected === 'closed'}
-                                            borderRightRadius='md'
+                                            type='roll'
+                                            title='Rolagem'
+                                            onPress={() => setStatusSelected('roll')}
+                                            isActive={statusSelected === 'roll'}
+                                            borderRadius='md'
+                                        />
+                                        
+                                        <Filter
+                                            type='pre'
+                                            title='Pré'
+                                            onPress={() => setStatusSelected('pre')}
+                                            isActive={statusSelected === 'pre'}
+                                            borderRadius='md'
                                         />
                                     </HStack>
 
@@ -622,7 +687,9 @@ export function NewCharacter({ route, navigation }) {
                                         p={2}
                                     >
                                         <Box w='30%'>
-                                            <Text fontSize='5xl' alignSelf='center'>24</Text>
+                                            <Text fontSize='5xl' alignSelf='center'>
+                                                { totalPoints }
+                                            </Text>
                                         </Box>
 
                                         <Box w='70%'>
@@ -630,17 +697,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Força</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(strenth, setStrenth) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(strenth, setStrenth) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{strenth}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(strenth, setStrenth) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(strenth, setStrenth) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
 
@@ -648,17 +719,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Destreza</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(dexterity, setDexterity) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(dexterity, setDexterity) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{dexterity}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(dexterity, setDexterity) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(dexterity, setDexterity) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
 
@@ -666,17 +741,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Constituição</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(constituition, setConstituition) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(constituition, setConstituition) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{constituition}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(constituition, setConstituition) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(constituition, setConstituition) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
 
@@ -684,17 +763,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Inteligência</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(intelligence, setIntelligence) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(intelligence, setIntelligence) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{intelligence}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(intelligence, setIntelligence) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(intelligence, setIntelligence) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
 
@@ -702,17 +785,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Sabedoria</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(wisdom, setWisdom) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(wisdom, setWisdom) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{wisdom}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(wisdom, setWisdom) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(wisdom, setWisdom) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
 
@@ -720,17 +807,21 @@ export function NewCharacter({ route, navigation }) {
                                                 <Text fontSize='lg'>Carisma</Text>
 
                                                 <HStack w='103px' justifyContent='space-between'>
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<MinusCircle />}
-                                                        onPress={() => { less(charisma, setCharisma) }}
+                                                    as={<MinusCircle />}
+                                                    onPress={() => { decrementAttribute(charisma, setCharisma) }}
                                                     />
+                                                    }
 
                                                     <Text fontSize='lg' mx={4}>{charisma}</Text>
 
+                                                    {statusSelected == 'distributed' &&
                                                     <ButtonIcons
-                                                        as={<PlusCircle />}
-                                                        onPress={() => { more(charisma, setCharisma) }}
+                                                    as={<PlusCircle />}
+                                                    onPress={() => { incrementAttribute(charisma, setCharisma) }}
                                                     />
+                                                    }
                                                 </HStack>
                                             </HStack>
                                         </Box>
