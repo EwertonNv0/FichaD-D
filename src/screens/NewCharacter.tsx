@@ -16,6 +16,8 @@ import { classes } from '../utils/Classes';
 import { ScrollTemplate } from '../components/template/ScrollTemplate';
 import { backgrounds } from '../utils/Backgrounds';
 import { BackButton } from '../components/BackButton';
+import { feats } from '../utils/Feats';
+import { FeatData } from '../interfaces/FeatData';
 
 export function NewCharacter({ route, navigation }) {
 
@@ -201,13 +203,21 @@ export function NewCharacter({ route, navigation }) {
             setSkillsBg(findBg.skills)
             setToolsBg(findBg.tools)
             setLangBg(findBg.language)
-
-            if(findBg.variant) console.log(findBg.variantDescription)
         }
     }, [background])
 
     // Formulário parte 03
+    const [feat, setFeat] = useState('')
+    const [selectedFeat, setSelectedFeat] = useState<FeatData>({} as FeatData)
 
+    useEffect(() => {
+        const findFeat = feats.find(ft => ft.id == parseInt(feat))
+
+        if(findFeat)
+        {
+            setSelectedFeat(findFeat as FeatData)
+        }
+    }, [])
 
     // Formulário parte 04
     const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
@@ -543,15 +553,17 @@ export function NewCharacter({ route, navigation }) {
                                             bg: 'teal.600',
                                             endIcon: <CheckIcon size='5' />
                                         }}
-                                        onValueChange={setBackground}
-                                        selectedValue={background}
+                                        onValueChange={setFeat}
+                                        selectedValue={feat}
                                     >
-                                        <Select.Item
-                                            label='asdasd'
-                                            value='qweqwe'
-                                            key='asds'
-                                        >
-                                        </Select.Item>
+                                        {feats.map(ft =>
+                                            <Select.Item
+                                                label={ft.name}
+                                                value={`${ft.id}`}
+                                                key={ft.id}
+                                            >
+                                            </Select.Item>)
+                                        }
                                     </Select>
 
                                     <Box
@@ -565,7 +577,11 @@ export function NewCharacter({ route, navigation }) {
                                     >
                                         <ScrollTemplate>
                                             <Text fontSize='sm' textAlign='justify'>
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod neque tenetur possimus aliquid. Dolorum repellat vero consequuntur laborum tempore cumque commodi facere provident optio autem nisi, odio non eius ea.
+                                                {
+                                                selectedFeat.description != ''
+                                                ? selectedFeat.description
+                                                :'Sem Descrição'
+                                                }
                                             </Text>
                                         </ScrollTemplate>
                                     </Box>
